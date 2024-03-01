@@ -26,5 +26,5 @@ pnpm build
 
 ## 项目开发经历步骤
 
-1. 使用 pnpm create vue@latest 创建项目
-2. 安装 sass
+1. 使用 pnpm create vue@latest 创建项目并安装 sass
+2. 更新 gitignore，保留.vscode文件夹
