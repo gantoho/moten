@@ -1,2 +1,30 @@
 # moten
- 🪑 榫卯低代码平台. Mortise and tenon lowcode platform.
+
+## 推荐插件
+
+1. Vue Language Features (Volar)
+2. TypeScript Vue Plugin (Volar)
+3. Pretty TypeScript Errors
+
+## 项目启动
+
+```sh
+pnpm install
+```
+
+### 运行
+
+```sh
+pnpm dev
+```
+
+### 编译
+
+```sh
+pnpm build
+```
+
+## 项目开发经历步骤
+
+1. 使用 pnpm create vue@latest 创建项目
+2. 安装 sass
