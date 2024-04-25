@@ -1,0 +1,12 @@
+@include b('column') {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  &.is-row {
+    flex-direction: column;
+  }
+  .item {
+    flex: 1;
+    min-height: 240px;
+  }
+}

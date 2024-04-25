@@ -1,0 +1,15 @@
+@include b('image') {
+  .image {
+    width: 100%;
+    display: block;
+    @include res(height, 295, 295);
+  }
+  .no-image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    @include res(height, 295, 295);
+  }
+}
