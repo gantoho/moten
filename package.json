@@ -2,7 +2,7 @@
     "name": "moten",
     "private": true,
     "version": "1.0.0",
-    "description": "page designer component lib.",
+    "description": "榫卯低代码平台. Mortise and tenon low code platform.",
     "type": "module",
     "packageManager": "pnpm@7.9.5",
     "engines": {
