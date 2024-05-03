@@ -19,9 +19,9 @@ export const poolClose = () => {
 }
 
 // 封装查询函数
-export const query = (sql) => {
+export const query = (sql, params) => {
   return new Promise((resolve, reject) => {
-    pool.query(sql, function (err, results, fields) {
+    pool.query(sql, params, function (err, results, fields) {
       if (err) {
         reject(err)
       } else {

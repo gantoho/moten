@@ -43,8 +43,8 @@ class Response {
    */
   constructor(code, message, data) {
     this.code = code
-    this.message = message
-    this.data = data
+    this.message = message || ''
+    this.data = data || null
   }
 
   /**
@@ -57,18 +57,17 @@ class Response {
   /**
    * 失败
    */
-  static fail() {
-    return new Response(baseResponse.FAILED.code, baseResponse.FAILED.message, null)
+  static fail(message) {
+    return new Response(baseResponse.FAILED.code, baseResponse.FAILED.message + message)
   }
 
   /**
    * 参数校验失败
    */
-  static validateFailed(params) {
+  static validateFailed(keys) {
     return new Response(
       baseResponse.VALIDATE_FAILED.code,
-      baseResponse.VALIDATE_FAILED.message,
-      params,
+      baseResponse.VALIDATE_FAILED.message + `${keys ? ': ' + keys : ''}`,
     )
   }
 
@@ -76,7 +75,7 @@ class Response {
    * 接口不存在
    */
   static apiNotFount() {
-    return new Response(baseResponse.API_NOT_FOUNT.code, baseResponse.API_NOT_FOUNT.message, null)
+    return new Response(baseResponse.API_NOT_FOUNT.code, baseResponse.API_NOT_FOUNT.message)
   }
 }
 
