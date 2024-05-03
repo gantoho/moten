@@ -1,6 +1,6 @@
 import { query } from '../common/mysql.js'
 
-export const getPage = async () => {
+export const selectPageDao = async () => {
   try {
     const result = await query('SELECT * FROM page')
     return result
