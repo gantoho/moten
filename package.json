@@ -20,7 +20,8 @@
         "admin": "pnpm -F @moten/admin dev",
         "admin:build": "pnpm -F @moten/admin build",
         "play:vue2": "node --loader ts-node/esm ./scripts/play.ts -- vue2",
-        "play:vue3": "node --loader ts-node/esm ./scripts/play.ts -- vue3"
+        "play:vue3": "node --loader ts-node/esm ./scripts/play.ts -- vue3",
+        "server": "pnpm -F @moten/server dev"
     },
     "license": "ISC",
     "devDependencies": {

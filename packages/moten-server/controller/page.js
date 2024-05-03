@@ -1,16 +1,19 @@
+import Joi from 'joi'
 import { insertPageDao, selectPageDao } from '../dao/page.js'
 import response from '../utils/response.js'
 import validate from '../middleware/validate.js'
 
-const getPage = async (req, res) => {
-  const { query } = req
-  const { page, size } = query
-  const result = await selectPageDao()
-  res.json(response.success(result))
+const getPage = () => {
+  //   const { query } = req
+  //   const { page, size } = query
+  //   const result = selectPageDao()
+  //   res.json(response.success(result))
+  return []
 }
-const getPageById = (req, res) => {
-  const { params } = req
-  const { pageId } = params
+const getPageById = () => {
+  //   const { params } = req
+  //   const { pageId } = params
+  return []
 }
 const createPage = () => {
   const keys = {
@@ -26,8 +29,12 @@ const createPage = () => {
   }
   return [validate(schema, 'body'), handler]
 }
-const updatePage = () => {}
-const deletePage = () => {}
+const updatePage = () => {
+  return []
+}
+const deletePage = () => {
+  return []
+}
 
 export default {
   getPage,

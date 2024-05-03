@@ -7,7 +7,7 @@ export const insertPageDao = async (params, keys) => {
     const result = await query(sql, params)
     return { status: true, result }
   } catch (error) {
-    return { status: false, message: error.message }
+    return { status: false, message: error }
   }
 }
 

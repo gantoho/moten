@@ -57,7 +57,7 @@ class Response {
   /**
    * 失败
    */
-  static fail(message) {
+  static fail(message = '') {
     return new Response(baseResponse.FAILED.code, baseResponse.FAILED.message + message)
   }
 
