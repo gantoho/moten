@@ -2,7 +2,7 @@
  * 当前配置仅做demo使用
  */
 import axios, { AxiosRequestConfig } from 'axios'
-import fetchApi from '@/utils/request'
+import fetchApi from '@/composable/use-request'
 import type { PageDesignerFilePickerConfig, PageDesignerFolder, GetListDto } from './lib'
 
 interface ApiResponse<T> {

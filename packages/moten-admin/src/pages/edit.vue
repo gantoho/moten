@@ -10,13 +10,23 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useEditStore } from '@/stores/edit'
+import { get } from '@/composable/use-request'
 
 const edit = useEditStore()
 
 const classes = computed(() => {
   return { 'mobile-background': edit.isMobileViewport }
+})
+
+onMounted(async () => {
+  try {
+    const result = await get('/page/1')
+    console.warn(`✅ - file: edit.vue:25 - result:`, result)
+  } catch (e) {
+    console.warn(`✅ - file: edit.vue:27 - e:`, e)
+  }
 })
 </script>
 
