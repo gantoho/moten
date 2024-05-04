@@ -30,6 +30,7 @@ function ex(cmd: string, callback?: Function) {
 }
 
 let firstUIBuild = true
+ex('pnpm sv')
 ex('pnpm ui', (data: string) => {
   if (!firstUIBuild) return
 
