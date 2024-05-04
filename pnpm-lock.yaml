@@ -129,6 +129,7 @@ importers:
 
   packages/moten-server:
     specifiers:
+      cors: ^2.8.5
       dayjs: ^1.11.10
       express: ^4.19.2
       joi: ^17.13.1
@@ -136,6 +137,7 @@ importers:
       mysql2: ^3.9.7
       nodemon: ^3.1.0
     dependencies:
+      cors: 2.8.5
       dayjs: 1.11.10
       express: 4.19.2
       joi: 17.13.1
@@ -4468,6 +4470,14 @@ packages:
   /core-util-is/1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
+
+  /cors/2.8.5:
+    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
+    dev: false
 
   /cosmiconfig/7.1.0:
     resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
