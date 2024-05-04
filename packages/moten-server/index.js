@@ -11,7 +11,6 @@ app.listen(8080, () => console.log('app listening on port 8080'))
 
 // 公共
 app.get('/config', controller.common.getConfig)
-app.all('*', controller.common.notFound)
 
 // 页面
 app.get('/page', ...controller.page.getPage())

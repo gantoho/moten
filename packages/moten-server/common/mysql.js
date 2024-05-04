@@ -1,7 +1,7 @@
 import mysql from 'mysql2'
 
 // 创建数据库连接
-export const pool = mysql.createPool({
+const pool = mysql.createPool({
   host: 'localhost', // 主机地址
   user: 'root', // 用户名
   password: '12345678', // 密码
@@ -21,12 +21,20 @@ export const poolClose = () => {
 // 封装查询函数
 export const query = (sql, params) => {
   return new Promise((resolve, reject) => {
-    pool.query(sql, params, function (err, results, fields) {
-      if (err) {
+    pool.getConnection((err, connection) => {
+      if (err instanceof Error) {
         reject(err)
-      } else {
-        resolve(results)
+        connection.release()
+        return
       }
+      connection.query(sql, params, function (err, results, fields) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(results)
+        }
+        connection.release()
+      })
     })
   })
 }
