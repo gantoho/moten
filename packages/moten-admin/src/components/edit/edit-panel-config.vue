@@ -2,11 +2,10 @@
   <div class="edit-panel-config" ref="target" :class="{ 'is-show': edit.rightPanelShow }">
     <div class="icon-group">
       <v-icon
+        src="fluent:panel-right-expand-16-regular"
         :content="edit.rightPanelShow ? '收起侧边栏' : '展开侧边栏'"
         @click="panelRightSwitch"
-      >
-        <img :src="panelRightSwitchIcon" />
-      </v-icon>
+      />
     </div>
 
     <div class="content">
@@ -29,7 +28,6 @@
 import { ref, watch } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 import { useEditStore } from '@/stores/edit'
-import panelRightSwitchIcon from '@/assets/images/panel-right.png'
 
 const edit = useEditStore()
 

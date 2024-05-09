@@ -113,7 +113,7 @@ const activeClass = computed(() => {
   &:hover,
   &.is-active {
     // 注意不能像block-render做成after，否则组件无法拖入嵌套容器里
-    border: 2px dashed var(--color-edit-render-block-border-hover);
+    border: 1px dashed var(--color-edit-render-block-border-hover);
   }
 }
 .block-render {

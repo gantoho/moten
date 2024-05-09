@@ -10,9 +10,9 @@
             :group="{ name: dragGroup, pull: 'clone', put: false }"
           />
         </el-collapse-item>
-        <el-collapse-item title="活动组件" name="2">
+        <el-collapse-item title="高级组件" name="2">
           <edit-block-drag
-            :list="marketingBlockList"
+            :list="seniorBlocksList"
             :sort="false"
             :group="{ name: dragGroup, pull: 'clone', put: false }"
           />
@@ -24,13 +24,13 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { baseBlocks, marketingBlocks } from '@/config/blocks'
+import { baseBlocks, seniorBlocks } from '@/config/blocks'
 import { dragGroup } from './nested'
 
 const activeNames = ref(['1', '2'])
 
 const baseBlockList = ref(baseBlocks)
-const marketingBlockList = ref(marketingBlocks)
+const seniorBlocksList = ref(seniorBlocks)
 </script>
 
 <style lang="scss" scoped>

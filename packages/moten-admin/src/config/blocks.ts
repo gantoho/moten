@@ -1,60 +1,88 @@
-const importImage = (path: string): string => {
-  return new URL(`../assets/images/blocks/${path}.png`, import.meta.url).href
-}
+import icon from '@/config/icon'
+
+const { row, column, image, video, text, swiper, blank, canvas } = icon
 
 export const baseBlocks = [
   {
     id: '',
-    name: '多列',
-    code: 'column',
-    icon: importImage('column'),
-    nested: true,
-    children: [[], []],
-    formData: {},
-  },
-  {
-    id: '',
     name: '图片',
     code: 'image',
-    icon: importImage('image'),
+    icon: image,
     formData: {},
   },
   {
     id: '',
     name: '视频',
     code: 'video',
-    icon: importImage('video'),
+    icon: video,
     formData: {},
   },
   {
     id: '',
     name: '文本',
     code: 'text',
-    icon: importImage('text'),
+    icon: text,
     formData: {},
   },
   {
     id: '',
     name: '幻灯片',
     code: 'swiper',
-    icon: importImage('swiper'),
+    icon: swiper,
     formData: {},
   },
   {
     id: '',
     name: '留白',
     code: 'blank',
-    icon: importImage('blank'),
+    icon: blank,
     formData: {},
   },
 ]
 
-export const marketingBlocks = [
+export const seniorBlocks = [
   {
     id: '',
-    name: '幻灯片',
-    code: 'slider',
-    icon: importImage('swiper'),
+    name: '多行',
+    code: 'row',
+    icon: row,
+    nested: true,
+    children: [[], []],
+    formData: {},
+  },
+  {
+    id: '',
+    name: '多列',
+    code: 'column',
+    icon: column,
+    nested: true,
+    children: [[], []],
+    formData: {},
+  },
+  {
+    id: '',
+    name: '画布',
+    code: 'canvas',
+    icon: canvas,
+    nested: true,
+    children: [[], []],
+    formData: {},
+  },
+]
+
+export const canvasBlocks = [
+  {
+    id: '',
+    name: '图片',
+    code: 'image',
+    icon: image,
+    formData: {},
+  },
+  {
+    id: '',
+    name: '文本',
+    code: 'text',
+    icon: text,
     formData: {},
   },
 ]

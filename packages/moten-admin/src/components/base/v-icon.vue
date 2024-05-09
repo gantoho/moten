@@ -2,7 +2,7 @@
   <div class="icon">
     <el-tooltip class="tip" effect="dark" :content="content" :placement="placement" :hide-after="0">
       <div class="image-box" @click="click">
-        <img v-if="src" :src="src" class="image" />
+        <Icon v-if="src" class="image" :icon="src" />
         <slot v-else class="image" />
       </div>
     </el-tooltip>
@@ -10,6 +10,8 @@
 </template>
 
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue'
+
 defineProps({
   src: {
     type: String,

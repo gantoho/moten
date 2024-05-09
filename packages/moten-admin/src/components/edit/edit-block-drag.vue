@@ -12,7 +12,7 @@
   >
     <template #item="{ element }">
       <div class="block-item">
-        <img class="block-icon" :src="element.icon" />
+        <Icon class="block-icon" :icon="element.icon" />
         <div class="block-name" v-html="element.name" />
       </div>
     </template>
@@ -20,6 +20,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Icon } from '@iconify/vue'
 import { nanoid } from '@/utils/index'
 import { move } from './nested'
 import { cloneDeep } from 'lodash'
@@ -92,7 +93,8 @@ const clone = (e: any) => {
   font-size: 14px;
   background: var(--color-active-bg);
   border: 1px solid var(--color-active-text);
-  img {
+  img,
+  svg {
     width: 20px;
     height: 20px;
     margin: 0 auto;
