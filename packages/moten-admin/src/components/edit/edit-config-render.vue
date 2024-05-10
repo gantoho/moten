@@ -10,22 +10,26 @@
             :name="index"
           >
             <div v-for="(cItem, cIndex) in item.list" :key="index + '-' + cIndex">
-              <component
-                v-if="getMobileComponent(cItem)"
-                :is="getMobileComponent(cItem)"
-                :data="cItem"
-                :form-data="{}"
-                viewport="mobile"
-                @callback="callback"
-              />
-              <component
-                v-if="getDesktopComponent(cItem)"
-                :is="getDesktopComponent(cItem)"
-                :data="cItem"
-                :form-data="{}"
-                viewport="desktop"
-                @callback="callback"
-              />
+              <div v-show="!edit.isMobileViewport">
+                <component
+                  v-if="getComponent(cItem.code)"
+                  :is="getComponent(cItem.code)"
+                  :data="cItem"
+                  :form-data="{}"
+                  viewport="desktop"
+                  @callback="callback"
+                />
+              </div>
+              <div v-show="edit.isMobileViewport">
+                <component
+                  v-if="getComponent(cItem.code)"
+                  :is="getComponent(cItem.code)"
+                  :data="cItem"
+                  :form-data="{}"
+                  viewport="mobile"
+                  @callback="callback"
+                />
+              </div>
             </div>
           </el-collapse-item>
         </transition-group>
@@ -39,6 +43,7 @@
 import { ref, watch } from 'vue'
 import { batchDynamicComponents } from '@/utils/index'
 import { useEditStore } from '@/stores/edit'
+const edit = useEditStore()
 
 const props = defineProps({
   list: {
@@ -68,17 +73,6 @@ const callback = (data) => {
 
 const getComponent = (code: string) =>
   batchDynamicComponents(code, import.meta.glob('@/components/config/**/*.vue'))
-
-const getMobileComponent = (item: any) => {
-  const { mobile } = item.properties
-  const { code } = mobile
-  return getComponent(code)
-}
-const getDesktopComponent = (item: any) => {
-  const { desktop } = item.properties
-  const { code } = desktop
-  return getComponent(code)
-}
 </script>
 
 <style lang="scss" scoped>
@@ -86,9 +80,6 @@ const getDesktopComponent = (item: any) => {
   overflow-y: auto;
   width: 100%;
 
-  :deep(.el-collapse) {
-    border: 0;
-  }
   :deep(.el-collapse-item__header) {
     padding-left: 14px;
     font-size: 14px;

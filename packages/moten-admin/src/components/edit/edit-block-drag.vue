@@ -65,6 +65,7 @@ const clone = (e: any) => {
     text-align: center;
     padding: 10px;
     border-radius: 6px;
+
     &:active {
       cursor: grabbing;
     }

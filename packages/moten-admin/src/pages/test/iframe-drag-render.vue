@@ -77,7 +77,6 @@ export default {
       const classList = Array.from(e.to.classList)
       const futureIndex = e.draggedContext.futureIndex
       const oldIndex = e.draggedContext.index
-      console.warn(`✅ futureIndex:`, `${oldIndex}->${futureIndex}`, e)
       const pre = selected
 
       const isRelatedNested = classList?.includes(this.nestedClass)

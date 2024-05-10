@@ -16,7 +16,17 @@
           class="block-nested-render"
           :class="activeClass(element)"
           @click.stop="edit.setCurrentSelect(element)"
+          @mouseenter="hoverId = element.id"
+          @mouseleave="hoverId = ''"
         >
+          <transition name="fade">
+            <edit-render-hover
+              v-show="hoverId === element.id"
+              :id="element.id"
+              @copy="copy"
+              @clear="clear"
+            />
+          </transition>
           <component
             :is="renderComponentCode(element)"
             :data="element.formData"
@@ -39,7 +49,17 @@
           class="block-render"
           :class="activeClass(element)"
           @click.stop="edit.setCurrentSelect(element)"
+          @mouseenter="hoverId = element.id"
+          @mouseleave="hoverId = ''"
         >
+          <transition name="fade">
+            <edit-render-hover
+              v-show="hoverId === element.id"
+              :id="element.id"
+              @copy="copy"
+              @clear="clear"
+            />
+          </transition>
           <component :is="renderComponentCode(element)" :data="element.formData" />
         </div>
       </div>
@@ -48,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { nestedClass, move } from './nested'
 import { useEditStore } from '@/stores/edit'
 import { COMPONENT_PREFIX } from '@/config/config'
@@ -79,6 +99,8 @@ defineProps({
   },
 })
 
+const hoverId = ref('')
+
 const renderComponentCode = computed(() => {
   return (element: { code: string }) => {
     return COMPONENT_PREFIX + '-' + element.code
@@ -90,9 +112,21 @@ const activeClass = computed(() => {
     return { 'is-active': element.id === id }
   }
 })
+
+const copy = (id: string) => {
+  console.warn(id)
+}
+const clear = (id: string) => {
+  console.warn(id)
+}
 </script>
 
 <style lang="scss" scoped>
+.edit-render-drag {
+  .element {
+    position: relative;
+  }
+}
 .nested-item {
   border: 1px solid var(--color-edit-render-block-border);
   background: var(--color-edit-render-block-bg);

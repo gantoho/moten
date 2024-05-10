@@ -1,74 +1,58 @@
 <template>
-  <div class="control-tool-info">
-    <el-popover placement="bottom-end" :width="250" :visible="visiblePopover">
-      <template #reference>
-        <div @click="visiblePopover = true" class="control-tool-info__item w-p-100 tc">
-          <el-tooltip effect="dark" content="编辑组件名" placement="right-start">
-            <div>
-              <el-icon><Edit /></el-icon>
-            </div>
-          </el-tooltip>
-        </div>
-      </template>
-      <div>
-        <el-input
-          :model-value="inputValue"
-          :maxlength="10"
-          placeholder="最多输入10个字"
-          @input="inputChange"
-        />
-        <div class="tc m-t-10">
-          <el-button @click="visiblePopover = false" type="default"> 取消 </el-button>
-          <el-button
-            @click="changeComponentAlias(inputValue)"
-            type="primary"
-            :disabled="defaultValue === inputValue"
-          >
-            确认
-          </el-button>
-        </div>
-      </div>
-    </el-popover>
-
-    <el-tooltip effect="dark" content="复制" placement="right-start">
-      <div @click.stop="copyComponent" class="control-tool-info__item w-p-100 tc">
-        <el-icon><CopyDocument /></el-icon>
-      </div>
-    </el-tooltip>
-
-    <el-tooltip effect="dark" content="删除" placement="right-start">
-      <div @click.stop="deleteComponent" class="control-tool-info__item w-p-100 tc">
-        <el-icon><Delete /></el-icon>
-      </div>
-    </el-tooltip>
+  <div class="edit-render-hover">
+    <v-icon :src="icon.drag" content="按住拖动" class="item drag" />
+    <v-icon :src="icon.copy" content="复制" class="item" @click="copy" />
+    <v-icon :src="icon.delete" content="删除" class="item" @click="clear" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import icon from '@/config/icon'
 
-const visiblePopover = ref(false)
-const inputValue = ref('')
-const defaultValue = ref('')
+const props = defineProps({
+  id: {
+    type: String,
+    default: '',
+  },
+})
 
-const inputChange = () => {}
-const changeComponentAlias = (e) => {
-  visiblePopover.value = false
+const emit = defineEmits(['copy', 'clear'])
+
+const copy = () => {
+  emit('copy', props.id)
 }
-const copyComponent = () => {}
-const deleteComponent = () => {}
+
+const clear = () => {
+  emit('clear', props.id)
+}
 </script>
 
 <style lang="scss" scoped>
-.control-tool-info {
-  width: 32px;
+.edit-render-hover {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
   background: #fff;
-  box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  box-shadow: 0px 0 7px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  &__item {
-    height: 35px;
-    line-height: 35px;
-    cursor: pointer;
+  padding: 5px;
+  .item {
+    :deep(.image-box) {
+      width: 32px;
+      height: 32px;
+      padding: 6px;
+    }
+    &.drag {
+      :deep(.image-box) {
+        cursor: grab;
+        &:active {
+          cursor: grabbing;
+        }
+      }
+    }
   }
 }
 </style>

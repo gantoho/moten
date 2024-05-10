@@ -45,7 +45,7 @@ computed
     margin-right: auto;
     margin-top: calc(var(--edit-header-height) + 20px);
     margin-bottom: 20px;
-    transform: translateX(-30px);
+    transform: translateX(30px);
     transition: all 0.3s ease;
   }
   .empty {

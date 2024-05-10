@@ -13,7 +13,7 @@ export const useEditStore = defineStore('edit', {
       blockConfig: null as object | null,
       pageData: {},
       blockData: {},
-      viewport: '' as viewportType,
+      viewport: 'desktop' as viewportType,
       rightPanelShow: false,
     }
   },

@@ -38,7 +38,7 @@ export default {
   methods: {
     move(e: any) {
       const { futureIndex, index } = e.draggedContext
-      console.warn(`✅ - file: index.vue:45 - move - futureIndex:`, index, futureIndex)
+      console.log(index, futureIndex)
 
       return true
     },

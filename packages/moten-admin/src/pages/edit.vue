@@ -23,9 +23,9 @@ const classes = computed(() => {
 onMounted(async () => {
   try {
     const result = await get('/page/1')
-    console.warn(`✅ - file: edit.vue:25 - result:`, result)
+    console.log(`✅ - file: edit.vue:25 - result:`, result)
   } catch (e) {
-    console.warn(`✅ - file: edit.vue:27 - e:`, e)
+    console.warn(e)
   }
 })
 </script>
@@ -36,7 +36,7 @@ onMounted(async () => {
   overflow-x: hidden;
   user-select: none;
   --edit-header-height: 64px;
-  --edit-panel-block-width: 240px;
+  --edit-panel-block-width: 300px;
   .container {
     width: 100%;
     min-width: 100%;
