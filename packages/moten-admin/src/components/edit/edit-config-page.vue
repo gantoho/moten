@@ -1,6 +1,6 @@
 <template>
   <div class="edit-config-page">
-    <edit-config-render :list="edit.pageConfig" @callback="callback"></edit-config-render>
+    <edit-config-render :list="edit.pageConfig" @callback="callback" />
   </div>
 </template>
 

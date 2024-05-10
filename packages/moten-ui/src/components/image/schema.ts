@@ -1,9 +1,9 @@
 import { Type } from '@sinclair/typebox'
 
 const display = Type.Boolean({
-  code: 'config-switch',
-  label: '显示组件',
-  defaultValue: true,
+  code: 'config-viewport',
+  label: '选择终端',
+  defaultValue: 'all',
 })
 
 const src = Type.String({
@@ -39,47 +39,6 @@ export default Type.Object({
     mode: Type.Object({
       desktop: mode,
       mobile: mode,
-    }),
-  }),
-  style: Type.Object({
-    groupName: Type.String({
-      default: '样式设置',
-    }),
-    paddingLeft: Type.Number({
-      code: 'config-slider',
-      label: '左间距',
-      step: 1,
-      showInput: true,
-      defaultValue: 0,
-      maxLength: 100,
-      minLength: 0,
-    }),
-    paddingRight: Type.Number({
-      code: 'config-slider',
-      label: '右间距',
-      step: 1,
-      showInput: true,
-      defaultValue: 0,
-      maxLength: 100,
-      minLength: 0,
-    }),
-    paddingTop: Type.Number({
-      code: 'config-slider',
-      label: '上边距',
-      step: 1,
-      showInput: true,
-      defaultValue: 0,
-      maxLength: 100,
-      minLength: 0,
-    }),
-    paddingBottom: Type.Number({
-      code: 'config-slider',
-      label: '下边距',
-      step: 1,
-      showInput: true,
-      defaultValue: 0,
-      maxLength: 100,
-      minLength: 0,
     }),
   }),
 })

@@ -11,9 +11,8 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { omit } from 'lodash'
-import { useEditStore } from '@/stores/edit'
 import { blockSchema } from '@/config/schema'
-
+import { useEditStore } from '@/stores/edit'
 const edit = useEditStore()
 
 const list = ref<any[]>([])
@@ -38,6 +37,9 @@ watch(
     } else {
       list.value = []
     }
+  },
+  {
+    immediate: true,
   },
 )
 

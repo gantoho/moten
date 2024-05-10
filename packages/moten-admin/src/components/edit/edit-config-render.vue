@@ -2,7 +2,7 @@
   <div class="edit-config-render">
     <el-form label-width="auto">
       <el-collapse v-model="activeNames">
-        <transition-group name="list">
+        <transition-group name="fade">
           <el-collapse-item
             v-for="(item, index) in list"
             :key="index"
@@ -11,10 +11,19 @@
           >
             <div v-for="(cItem, cIndex) in item.list" :key="index + '-' + cIndex">
               <component
-                v-if="getComponent(cItem.code)"
-                :is="getComponent(cItem.code)"
+                v-if="getMobileComponent(cItem)"
+                :is="getMobileComponent(cItem)"
                 :data="cItem"
                 :form-data="{}"
+                viewport="mobile"
+                @callback="callback"
+              />
+              <component
+                v-if="getDesktopComponent(cItem)"
+                :is="getDesktopComponent(cItem)"
+                :data="cItem"
+                :form-data="{}"
+                viewport="desktop"
                 @callback="callback"
               />
             </div>
@@ -29,6 +38,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { batchDynamicComponents } from '@/utils/index'
+import { useEditStore } from '@/stores/edit'
 
 const props = defineProps({
   list: {
@@ -56,26 +66,22 @@ const callback = (data) => {
   emit('callback', data)
 }
 
-const getComponent = (name: string) => {
-  return batchDynamicComponents(name, import.meta.glob('@/components/config/**/*.vue'))
+const getComponent = (code: string) =>
+  batchDynamicComponents(code, import.meta.glob('@/components/config/**/*.vue'))
+
+const getMobileComponent = (item: any) => {
+  const { mobile } = item.properties
+  const { code } = mobile
+  return getComponent(code)
+}
+const getDesktopComponent = (item: any) => {
+  const { desktop } = item.properties
+  const { code } = desktop
+  return getComponent(code)
 }
 </script>
 
 <style lang="scss" scoped>
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-.list-leave-active {
-  position: absolute;
-}
-
 .edit-config-render {
   overflow-y: auto;
   width: 100%;

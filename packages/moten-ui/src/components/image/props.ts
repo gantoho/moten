@@ -1,5 +1,3 @@
-import type { PropType } from 'vue'
-
 export interface propData {
   /**
    * 图片地址
@@ -24,7 +22,7 @@ export const propDataDefaults = {
 
 export const props = {
   data: {
-    type: Object as PropType<propData>,
+    type: Object,
     default: () => propDataDefaults,
   },
 }

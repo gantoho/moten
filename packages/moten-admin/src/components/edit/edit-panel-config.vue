@@ -9,17 +9,10 @@
     </div>
 
     <div class="content">
-      <el-tabs type="border-card" v-model="tabActiveName">
-        <el-tab-pane label="页面配置" name="page">
-          <edit-config-page />
-        </el-tab-pane>
-        <el-tab-pane label="组件配置" name="component">
-          <edit-config-block />
-        </el-tab-pane>
-        <el-tab-pane label="组件管理" name="sort">
-          <edit-config-sort />
-        </el-tab-pane>
-      </el-tabs>
+      <transition name="fade">
+        <edit-config-page v-if="!edit.currentSelect" />
+        <edit-config-block v-else />
+      </transition>
     </div>
   </div>
 </template>
