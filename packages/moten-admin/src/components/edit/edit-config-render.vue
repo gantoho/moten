@@ -2,25 +2,23 @@
   <div class="edit-config-render">
     <el-form label-width="auto">
       <el-collapse v-model="activeNames">
-        <transition-group name="fade">
-          <el-collapse-item
-            v-for="(item, index) in list"
-            :key="index"
-            :title="item.groupName.default"
-            :name="index"
-          >
-            <div v-for="(cItem, cIndex) in item.list" :key="index + '-' + cIndex">
-              <component
-                v-if="getComponent(cItem.code)"
-                :is="getComponent(cItem.code)"
-                :data="cItem"
-                :form-data="{}"
-                :viewport="edit.viewport"
-                @callback="callback"
-              />
-            </div>
-          </el-collapse-item>
-        </transition-group>
+        <el-collapse-item
+          v-for="(item, index) in list"
+          :key="index"
+          :title="item.groupName.default"
+          :name="index"
+        >
+          <div v-for="(cItem, cIndex) in item.list" :key="index + '-' + cIndex">
+            <component
+              v-if="getComponent(cItem.code)"
+              :is="getComponent(cItem.code)"
+              :data="cItem"
+              :form-data="{}"
+              :viewport="edit.viewport"
+              @callback="callback"
+            />
+          </div>
+        </el-collapse-item>
       </el-collapse>
       <slot />
     </el-form>

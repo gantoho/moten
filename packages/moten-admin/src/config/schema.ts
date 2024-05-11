@@ -9,7 +9,7 @@ export const pageSchema = Type.Object({
       default: '基础设置',
     }),
     background: Type.String({
-      code: 'config-background',
+      code: 'config-color',
       label: '背景',
       defaultValue: '',
     }),

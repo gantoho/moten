@@ -115,6 +115,20 @@ const activeClass = computed(() => {
   }
 })
 
+const cloneNode = (node: any) => {
+  if (!node) return node
+  const newNode = cloneDeep(node)
+  const { children } = newNode || {}
+  if (children?.length) {
+    for (let i = 0; i < children.length; i++) {
+      for (let j = 0; j < children[i].length; j++) {
+        children[i][j] = cloneNode(children[i][j])
+      }
+    }
+  }
+  return clone(newNode)
+}
+
 const handleNodeById = (arr: Array<any>, nodeId: String, type: 'copy' | 'clear') => {
   if (!arr) return arr
   const array = cloneDeep(arr)
@@ -122,7 +136,7 @@ const handleNodeById = (arr: Array<any>, nodeId: String, type: 'copy' | 'clear')
     const node = array[i]
     if (node.id === nodeId) {
       // 如果找到了匹配的节点，直接删除并返回
-      if (type === 'copy') array.splice(i, 0, clone(node))
+      if (type === 'copy') array.splice(i, 0, cloneNode(node))
       if (type === 'clear') array.splice(i, 1)
       return array
     }
