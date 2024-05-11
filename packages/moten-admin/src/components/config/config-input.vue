@@ -27,7 +27,6 @@ const props = defineProps({
 const emit = defineEmits(['callback'])
 
 const { data, formData } = toRefs(props)
-console.warn(`✅ - file: config-input.vue:26 - data:`, props)
 const { label } = data.value
 const input = ref(formData.value[label])
 

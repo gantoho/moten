@@ -1,7 +1,7 @@
 <template>
   <div class="icon">
     <el-tooltip class="tip" effect="dark" :content="content" :placement="placement" :hide-after="0">
-      <div class="image-box" @click="click">
+      <div class="image-box">
         <Icon v-if="src" class="image" :icon="src" />
         <slot v-else class="image" />
       </div>
@@ -27,12 +27,6 @@ defineProps({
     default: 'bottom',
   },
 })
-
-const emit = defineEmits(['click'])
-
-const click = () => {
-  emit('click')
-}
 </script>
 
 <style lang="scss" scoped>

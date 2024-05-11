@@ -1,19 +1,21 @@
 import { defineStore } from 'pinia'
 import { baseBlocks } from '@/config/blocks'
 
-export type baseBlocksType = typeof baseBlocks
-export type baseBlocksTypeNull = baseBlocksType | null
-export type viewportType = 'mobile' | 'desktop'
+export type BaseBlocksType = typeof baseBlocks
+export type BaseBlocksTypeNull = BaseBlocksType | null
+export type ViewportType = 'mobile' | 'desktop'
+export type BlockConfigTypeNull = Array<BaseBlocksType> | null
 
 export const useEditStore = defineStore('edit', {
   state: () => {
     return {
-      currentSelect: null as baseBlocksTypeNull,
+      currentSelect: null as BaseBlocksTypeNull,
       pageConfig: null as object | null,
-      blockConfig: null as object | null,
+      blockConfig: null as BlockConfigTypeNull,
+      blockConfigTemp: null as BlockConfigTypeNull,
       pageData: {},
       blockData: {},
-      viewport: 'desktop' as viewportType,
+      viewport: 'desktop' as ViewportType,
       rightPanelShow: false,
     }
   },
@@ -21,11 +23,14 @@ export const useEditStore = defineStore('edit', {
     isMobileViewport: (state) => state.viewport === 'mobile',
   },
   actions: {
-    setCurrentSelect(value: baseBlocksTypeNull) {
+    setCurrentSelect(value: BaseBlocksTypeNull) {
       this.currentSelect = value
     },
-    setBlockConfig(value: object) {
+    setBlockConfig(value: BlockConfigTypeNull) {
       this.blockConfig = value
+    },
+    setBlockConfigTemp(value: BlockConfigTypeNull) {
+      this.blockConfigTemp = value
     },
     setPageConfig(value: object) {
       this.pageConfig = value
@@ -36,7 +41,7 @@ export const useEditStore = defineStore('edit', {
     setBlockData(value: object) {
       this.blockData = value
     },
-    setViewport(value: viewportType) {
+    setViewport(value: ViewportType) {
       this.viewport = value
     },
     setRightPanelShow(value: boolean) {

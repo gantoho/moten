@@ -4,7 +4,7 @@
       <v-icon
         :src="icon.expand"
         :content="edit.rightPanelShow ? '收起侧边栏' : '展开侧边栏'"
-        @click="panelRightSwitch"
+        @click.native="panelRightSwitch"
       />
     </div>
 

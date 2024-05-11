@@ -68,7 +68,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { computed, markRaw, ref } from 'vue'
+import { cloneDeep, isEqual } from 'lodash'
 import { nestedClass, move } from './nested'
 import { useEditStore } from '@/stores/edit'
 import { COMPONENT_PREFIX } from '@/config/config'
@@ -113,11 +114,47 @@ const activeClass = computed(() => {
   }
 })
 
-const copy = (id: string) => {
-  console.warn(id)
+const removeNodeById = (arr: Array<any>, nodeIdToRemove: String) => {
+  if (!arr) return arr
+  const array = cloneDeep(arr)
+  for (let i = 0; i < array.length; i++) {
+    const node = array[i]
+    // TODO
+    console.warn(
+      `✅ - file: edit-render-drag.vue:128 - removeNodeById - node.id === nodeIdToRemove:`,
+      node.id === nodeIdToRemove,
+      node.id,
+      nodeIdToRemove,
+      array,
+    )
+    if (node.id === nodeIdToRemove) {
+      // 如果找到了匹配的节点，直接删除并返回
+      array.splice(i, 1)
+      return array
+    }
+    if (node.children && node.children.length > 0) {
+      // 如果节点有子节点，则递归调用 removeNodeById 函数
+      for (let j = 0; j < node.children.length; j++) {
+        if (!node.children[j].length) break
+        const updatedChildren = removeNodeById(node.children[j], nodeIdToRemove)
+        if (isEqual(updatedChildren, node.children[j])) {
+          // 如果子节点数组有更新，则更新当前节点的子节点数组
+          node.children[j] = updatedChildren
+          return array // 返回更新后的数组
+        }
+      }
+    }
+  }
+  return array // 如果未找到匹配的节点，则返回原始数组
 }
+
+const copy = (id: string) => {}
 const clear = (id: string) => {
-  console.warn(id)
+  if (!edit.blockConfig) return
+  const blockConfig = markRaw(edit.blockConfig)
+  const newBlockConfig = removeNodeById(blockConfig, id)
+  edit.setCurrentSelect(null)
+  edit.setBlockConfigTemp(newBlockConfig)
 }
 </script>
 

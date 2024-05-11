@@ -1,8 +1,8 @@
 <template>
   <div class="edit-render-hover">
     <v-icon :src="icon.drag" content="按住拖动" class="item drag" />
-    <v-icon :src="icon.copy" content="复制" class="item" @click="copy" />
-    <v-icon :src="icon.delete" content="删除" class="item" @click="clear" />
+    <v-icon :src="icon.copy" content="复制" class="item" @click.stop.native="copy" />
+    <v-icon :src="icon.delete" content="删除" class="item" @click.stop.native="clear" />
   </div>
 </template>
 
