@@ -1,3 +1,6 @@
+import { nanoid } from '@/utils/index'
+import { cloneDeep } from 'lodash'
+
 /**
  * column嵌套class
  * 用来在move里判断是否可以嵌套
@@ -20,4 +23,8 @@ export const move = (e: any) => {
   const isRelatedNested = classList?.includes(nestedClass)
   if (e?.draggedContext?.element?.nested && isRelatedNested) return false
   return true
+}
+
+export const clone = (e: object) => {
+  return cloneDeep({ ...e, id: nanoid(8) })
 }

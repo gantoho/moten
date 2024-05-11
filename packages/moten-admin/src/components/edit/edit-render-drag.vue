@@ -29,6 +29,7 @@
           </transition>
           <component
             :is="renderComponentCode(element)"
+            :key="element.id"
             :data="element.formData"
             :list="element.children"
           >
@@ -70,7 +71,7 @@
 <script lang="ts" setup>
 import { computed, markRaw, ref } from 'vue'
 import { cloneDeep, isEqual } from 'lodash'
-import { nestedClass, move } from './nested'
+import { nestedClass, move, clone } from './nested'
 import { useEditStore } from '@/stores/edit'
 import { COMPONENT_PREFIX } from '@/config/config'
 
@@ -114,30 +115,23 @@ const activeClass = computed(() => {
   }
 })
 
-const removeNodeById = (arr: Array<any>, nodeIdToRemove: String) => {
+const handleNodeById = (arr: Array<any>, nodeId: String, type: 'copy' | 'clear') => {
   if (!arr) return arr
   const array = cloneDeep(arr)
   for (let i = 0; i < array.length; i++) {
     const node = array[i]
-    // TODO
-    console.warn(
-      `✅ - file: edit-render-drag.vue:128 - removeNodeById - node.id === nodeIdToRemove:`,
-      node.id === nodeIdToRemove,
-      node.id,
-      nodeIdToRemove,
-      array,
-    )
-    if (node.id === nodeIdToRemove) {
+    if (node.id === nodeId) {
       // 如果找到了匹配的节点，直接删除并返回
-      array.splice(i, 1)
+      if (type === 'copy') array.splice(i, 0, clone(node))
+      if (type === 'clear') array.splice(i, 1)
       return array
     }
     if (node.children && node.children.length > 0) {
-      // 如果节点有子节点，则递归调用 removeNodeById 函数
+      // 如果节点有子节点，则递归调用 handleNodeById 函数
       for (let j = 0; j < node.children.length; j++) {
-        if (!node.children[j].length) break
-        const updatedChildren = removeNodeById(node.children[j], nodeIdToRemove)
-        if (isEqual(updatedChildren, node.children[j])) {
+        if (!node.children[j].length) continue
+        const updatedChildren = handleNodeById(node.children[j], nodeId, type)
+        if (!isEqual(updatedChildren, node.children[j])) {
           // 如果子节点数组有更新，则更新当前节点的子节点数组
           node.children[j] = updatedChildren
           return array // 返回更新后的数组
@@ -148,11 +142,17 @@ const removeNodeById = (arr: Array<any>, nodeIdToRemove: String) => {
   return array // 如果未找到匹配的节点，则返回原始数组
 }
 
-const copy = (id: string) => {}
+const copy = (id: string) => {
+  if (!edit.blockConfig) return
+  const blockConfig = markRaw(edit.blockConfig)
+  const newBlockConfig = handleNodeById(blockConfig, id, 'copy')
+  edit.setCurrentSelect(null)
+  edit.setBlockConfigTemp(newBlockConfig)
+}
 const clear = (id: string) => {
   if (!edit.blockConfig) return
   const blockConfig = markRaw(edit.blockConfig)
-  const newBlockConfig = removeNodeById(blockConfig, id)
+  const newBlockConfig = handleNodeById(blockConfig, id, 'clear')
   edit.setCurrentSelect(null)
   edit.setBlockConfigTemp(newBlockConfig)
 }

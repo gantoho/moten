@@ -17,11 +17,10 @@ export default defineComponent({
   name,
   props,
   setup(props) {
-    const { data, list } = props
-    const { cols = 2 } = data as propData
+    const { cols = 2 } = props.data as propData
 
     const classes = computed(() => [n()])
-    const item = computed(() => (index: number) => list[index] || {})
+    const item = computed(() => (index: number) => props.list[index] || {})
 
     return {
       cols,

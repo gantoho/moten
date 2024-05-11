@@ -20,8 +20,7 @@ export default defineComponent({
   props,
   components: { DeEmpty },
   setup(props, context) {
-    const { data } = props
-    const { src, alt, mode } = data as propData
+    const { src, alt, mode } = props.data as propData
 
     const attributes = computed(() => ({
       ...context.attrs,

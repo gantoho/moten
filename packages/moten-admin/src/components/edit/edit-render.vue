@@ -14,14 +14,23 @@ const edit = useEditStore()
 
 const list = ref([])
 
-watch(list.value, (val: any) => {
-  edit.setBlockConfig(val)
-})
+watch(
+  list.value,
+  (val: any) => {
+    edit.setBlockConfig(val)
+  },
+  {
+    deep: true,
+  },
+)
 watch(
   () => edit.blockConfigTemp,
   (val: any) => {
     list.value = val
     edit.setBlockConfig(val)
+  },
+  {
+    deep: true,
   },
 )
 

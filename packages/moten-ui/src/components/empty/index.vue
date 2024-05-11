@@ -17,14 +17,12 @@ export default defineComponent({
   name,
   props,
   setup(props) {
-    const { image, description } = props
-
-    const src = computed(() => image || noDataIcon)
+    const src = computed(() => props.image || noDataIcon)
     const classes = computed(() => [n()])
 
     return {
       src,
-      description,
+      description: props.description,
       classes,
     }
   },

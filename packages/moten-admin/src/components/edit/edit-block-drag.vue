@@ -21,9 +21,7 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-import { nanoid } from '@/utils/index'
-import { move } from './nested'
-import { cloneDeep } from 'lodash'
+import { move, clone } from './nested'
 
 defineOptions({
   name: 'edit-block-drag',
@@ -44,11 +42,6 @@ defineProps({
     default: true,
   },
 })
-
-const clone = (e: any) => {
-  const value = cloneDeep({ ...e, id: nanoid(8) })
-  return value
-}
 </script>
 
 <style lang="scss" scoped>
