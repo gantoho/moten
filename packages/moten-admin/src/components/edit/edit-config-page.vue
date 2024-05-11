@@ -8,21 +8,30 @@
 import { omit } from 'lodash'
 import { useEditStore } from '@/stores/edit'
 import { pageSchema } from '@/config/schema'
+import { computed, watch } from 'vue'
 
 const edit = useEditStore()
 
-const pageConfig = Object.values(pageSchema.properties).map((item) => {
-  const { groupName } = item.properties
-  const pickResult: object = omit(item.properties, ['groupName'])
-  return {
-    groupName,
-    list: [...Object.values(pickResult)],
-  }
+const pageConfig = computed(() => {
+  return Object.values(pageSchema.properties).map((item) => {
+    const { groupName } = item.properties
+    const pickResult: object = omit(item.properties, ['groupName'])
+    const listResult = Object.fromEntries(
+      Object.entries(pickResult).map(([key, value]) => [key, { ...value, key, formData: {} }]),
+    )
+    return {
+      groupName,
+      list: [...Object.values(listResult)],
+    }
+  })
 })
-edit.setPageConfig(pageConfig)
+
+watch(pageConfig, (val) => {
+  edit.setPageConfig(val)
+})
 
 const callback = (data: any) => {
-  edit.updatePageData(data)
+  console.warn(data)
 }
 </script>
 

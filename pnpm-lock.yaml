@@ -31,6 +31,7 @@ importers:
       axios: ^1.6.7
       cross-env: ^7.0.3
       dayjs: ^1.11.10
+      deepmerge: ^4.3.1
       element-plus: ^2.6.1
       js-cookie: ^3.0.5
       lodash: ^4.17.21
@@ -61,6 +62,7 @@ importers:
       autoprefixer: 10.4.19_postcss@8.4.38
       axios: 1.6.8
       dayjs: 1.11.10
+      deepmerge: 4.3.1
       element-plus: 2.7.2_vue@3.4.25
       js-cookie: 3.0.5
       lodash: 4.17.21
@@ -4813,7 +4815,6 @@ packages:
   /deepmerge/4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
     engines: {node: '>=0.10.0'}
-    dev: true
 
   /default-gateway/6.0.3:
     resolution: {integrity: sha512-fwSOJsbbNzZ/CUFpqFBqYfYNLj1NbMPm8MMCIzHjC83iSJRBEGmDUxU+WP661BaBQImeC2yHwXtz+P/O9o+XEg==}

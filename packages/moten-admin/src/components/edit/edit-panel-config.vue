@@ -9,14 +9,12 @@
     </div>
 
     <div class="content">
-      <transition name="fade">
+      <transition-group name="fade">
         <div class="title" v-if="edit.currentSelect">组件</div>
         <div class="title" v-else>页面</div>
-      </transition>
-      <transition name="fade">
-        <edit-config-page v-if="!edit.currentSelect" />
-        <edit-config-block v-else />
-      </transition>
+        <edit-config-block v-if="edit.currentSelect" />
+        <edit-config-page v-else />
+      </transition-group>
     </div>
   </div>
 </template>

@@ -35,7 +35,7 @@ watch(
 )
 
 const pageStyle = computed(() => {
-  return edit.pageData
+  return {}
 })
 const pageClass = computed(() => {
   return { 'is-mobile': edit.isMobileViewport }

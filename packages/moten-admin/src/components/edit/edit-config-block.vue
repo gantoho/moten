@@ -29,9 +29,12 @@ watch(
       list.value = Object.values(blockSchema[value?.code]?.properties).map((item) => {
         const { groupName } = item.properties
         const pickResult: object = omit(item.properties, ['groupName'])
+        const listResult = Object.fromEntries(
+          Object.entries(pickResult).map(([key, value]) => [key, { ...value, key }]),
+        )
         return {
           groupName,
-          list: [...Object.values(pickResult)],
+          list: [...Object.values(listResult)],
         }
       })
     } else {

@@ -20,29 +20,23 @@ const props = defineProps({
   },
   viewport: {
     type: String,
-    default: 'mobile',
+    default: 'desktop',
   },
 })
 
 const emit = defineEmits(['callback'])
 
 const { data, formData } = toRefs(props)
-const { label } = data.value
+const { label, key } = data.value
 const input = ref(formData.value[label])
 
-watch(
-  input,
-  (value) => {
-    emit('callback', {
-      text: {
-        [props.viewport]: value,
-      },
-    })
-  },
-  {
-    immediate: true,
-  },
-)
+watch(input, (value) => {
+  emit('callback', {
+    [key]: {
+      [props.viewport]: value || '',
+    },
+  })
+})
 </script>
 
 <style lang="scss" scoped>

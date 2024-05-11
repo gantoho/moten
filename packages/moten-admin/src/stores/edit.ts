@@ -13,8 +13,6 @@ export const useEditStore = defineStore('edit', {
       pageConfig: null as object | null,
       blockConfig: null as BlockConfigTypeNull,
       blockConfigTemp: null as BlockConfigTypeNull,
-      pageData: {},
-      blockData: {},
       viewport: 'desktop' as ViewportType,
       rightPanelShow: false,
     }
@@ -34,12 +32,6 @@ export const useEditStore = defineStore('edit', {
     },
     setPageConfig(value: object) {
       this.pageConfig = value
-    },
-    updatePageData(value: object) {
-      this.pageData = { ...this.pageData, ...value }
-    },
-    setBlockData(value: object) {
-      this.blockData = value
     },
     setViewport(value: ViewportType) {
       this.viewport = value

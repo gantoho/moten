@@ -10,26 +10,14 @@
             :name="index"
           >
             <div v-for="(cItem, cIndex) in item.list" :key="index + '-' + cIndex">
-              <div v-show="!edit.isMobileViewport">
-                <component
-                  v-if="getComponent(cItem.code)"
-                  :is="getComponent(cItem.code)"
-                  :data="cItem"
-                  :form-data="{}"
-                  viewport="desktop"
-                  @callback="callback"
-                />
-              </div>
-              <div v-show="edit.isMobileViewport">
-                <component
-                  v-if="getComponent(cItem.code)"
-                  :is="getComponent(cItem.code)"
-                  :data="cItem"
-                  :form-data="{}"
-                  viewport="mobile"
-                  @callback="callback"
-                />
-              </div>
+              <component
+                v-if="getComponent(cItem.code)"
+                :is="getComponent(cItem.code)"
+                :data="cItem"
+                :form-data="{}"
+                :viewport="edit.viewport"
+                @callback="callback"
+              />
             </div>
           </el-collapse-item>
         </transition-group>
@@ -59,7 +47,7 @@ const activeNames = ref<number[]>([])
 watch(
   () => props.list,
   (value) => {
-    const map = value.map((v, i) => i)
+    const map = value.map((_, i) => i)
     activeNames.value = map
   },
   {
@@ -67,7 +55,7 @@ watch(
   },
 )
 
-const callback = (data) => {
+const callback = (data: any) => {
   emit('callback', data)
 }
 
