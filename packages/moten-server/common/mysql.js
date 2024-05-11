@@ -24,7 +24,6 @@ export const query = (sql, params) => {
     pool.getConnection((err, connection) => {
       if (err instanceof Error) {
         reject(err)
-        connection.release()
         return
       }
       connection.query(sql, params, function (err, results, fields) {

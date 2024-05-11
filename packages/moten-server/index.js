@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.listen(8080, () => console.log('app listening on port 8080'))
+app.listen(8081, () => console.log('app listening on port 8081'))
 
 // 公共
 app.get('/config', controller.common.getConfig)
