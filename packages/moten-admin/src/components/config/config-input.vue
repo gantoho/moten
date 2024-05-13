@@ -14,10 +14,6 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
-  formData: {
-    type: Object,
-    default: () => {},
-  },
   viewport: {
     type: String,
     default: 'desktop',
@@ -26,17 +22,20 @@ const props = defineProps({
 
 const emit = defineEmits(['callback'])
 
-const { data, formData } = toRefs(props)
-const { label, parentKey, key } = data.value
-const input = ref(formData.value[label])
+const { data } = toRefs(props)
+const { label, defaultValue, parentKey, key, id } = data.value
+const input = ref(defaultValue || '')
 
 watch(input, (value) => {
   emit('callback', {
-    [parentKey]: {
-      [key]: {
-        [props.viewport]: value || '',
+    data: {
+      [parentKey]: {
+        [key]: {
+          [props.viewport]: value || '',
+        },
       },
     },
+    id,
   })
 })
 </script>

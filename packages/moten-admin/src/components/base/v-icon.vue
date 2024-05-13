@@ -38,7 +38,7 @@ defineProps({
   width: 26px;
   height: 26px;
   padding: 3px;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
   align-items: center;

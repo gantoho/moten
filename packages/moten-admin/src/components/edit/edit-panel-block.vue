@@ -80,14 +80,14 @@ const seniorBlocksList = ref(seniorBlocks)
       justify-content: center;
       text-align: center;
       padding: 5.5px 0;
-      border-radius: 6px;
+      border-radius: var(--border-radius);
       cursor: pointer;
       margin: 17px 5px;
 
       &.is-active,
       &:hover {
         background: var(--color-block-hover);
-        border-radius: 6px;
+        border-radius: var(--border-radius);
       }
       .menu-icon {
         width: 30px;

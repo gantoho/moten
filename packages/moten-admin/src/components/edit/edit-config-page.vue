@@ -12,14 +12,16 @@ import { pageSchema } from '@/config/schema'
 
 const edit = useEditStore()
 
-const pageRender = Object.values(pageSchema.properties).map((item, index) => {
-  const parentKey = Object.keys(pageSchema.properties)[index]
+const properties = pageSchema.properties
+const pageRender = Object.values(properties).map((item, index) => {
+  const parentKey = Object.keys(properties)[index]
+  const formData = edit.pageConfig as any
   const { groupName } = item.properties
   const pickResult: object = omit(item.properties, ['groupName'])
   const listResult = Object.fromEntries(
     Object.entries(pickResult).map(([key, value]) => [
       key,
-      { ...value, key, parentKey, formData: {} },
+      { ...value, key, parentKey, formData: formData?.[parentKey]?.[key] || {} },
     ]),
   )
   return {
@@ -28,7 +30,9 @@ const pageRender = Object.values(pageSchema.properties).map((item, index) => {
   }
 })
 
-const callback = (data: any) => {
+const callback = (params: any) => {
+  const { data, id } = params
+  if (id) return
   const formData = edit.pageConfig || {}
   edit.setPageConfig(deepmerge(formData, data))
 }

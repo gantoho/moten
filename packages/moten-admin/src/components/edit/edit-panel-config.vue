@@ -83,7 +83,7 @@ const panelRightSwitch = () => {
       width: 32px;
       height: 32px;
       padding: 3px;
-      border-radius: 6px;
+      border-radius: var(--border-radius);
       display: flex;
       justify-content: center;
       align-items: center;

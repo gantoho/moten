@@ -7,10 +7,27 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ConfigBaseTab: typeof import('./src/components/config/base/config-base-tab.vue')['default']
+    ConfigColor: typeof import('./src/components/config/config-color.vue')['default']
+    ConfigFiles: typeof import('./src/components/config/config-files.vue')['default']
+    ConfigImageMode: typeof import('./src/components/config/config-image-mode.vue')['default']
+    ConfigInput: typeof import('./src/components/config/config-input.vue')['default']
+    ConfigRichText: typeof import('./src/components/config/config-rich-text.vue')['default']
+    ConfigViewport: typeof import('./src/components/config/config-viewport.vue')['default']
     ControlForm: typeof import('./src/components/edit/control-form.vue')['default']
     ControlPanel: typeof import('./src/components/edit/control-panel.vue')['default']
     ControlTool: typeof import('./src/components/edit/control-tool.vue')['default']
     ControlWidgets: typeof import('./src/components/edit/control-widgets.vue')['default']
+    EditBlockDrag: typeof import('./src/components/edit/edit-block-drag.vue')['default']
+    EditConfigBlock: typeof import('./src/components/edit/edit-config-block.vue')['default']
+    EditConfigPage: typeof import('./src/components/edit/edit-config-page.vue')['default']
+    EditConfigRender: typeof import('./src/components/edit/edit-config-render.vue')['default']
+    EditHeader: typeof import('./src/components/edit/edit-header.vue')['default']
+    EditPanelBlock: typeof import('./src/components/edit/edit-panel-block.vue')['default']
+    EditPanelConfig: typeof import('./src/components/edit/edit-panel-config.vue')['default']
+    EditRender: typeof import('./src/components/edit/edit-render.vue')['default']
+    EditRenderDrag: typeof import('./src/components/edit/edit-render-drag.vue')['default']
+    EditRenderHover: typeof import('./src/components/edit/edit-render-hover.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCascader: typeof import('element-plus/es')['ElCascader']
@@ -54,6 +71,8 @@ declare module 'vue' {
     Preview: typeof import('./src/components/preview/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VIcon: typeof import('./src/components/base/v-icon.vue')['default']
+    VSelect: typeof import('./src/components/base/v-select.vue')['default']
   }
   export interface ComponentCustomProperties {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

@@ -57,7 +57,7 @@ defineProps({
     aspect-ratio: 1 / 1;
     text-align: center;
     padding: 10px;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
 
     &:active {
       cursor: grabbing;

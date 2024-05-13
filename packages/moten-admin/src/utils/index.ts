@@ -13,7 +13,6 @@ export const nanoid = (length = 8) => {
 
 /**
  * 动态引入组件
- * 注：Vue3引入动态组件只能通过引入组件，Vue2指定名字的方式失效了
  * @param name 组件名
  * @param importUrl 引入所有的组件 import.meta.glob('@/components/config/**')
  * @returns

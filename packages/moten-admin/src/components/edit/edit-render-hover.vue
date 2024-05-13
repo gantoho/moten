@@ -37,7 +37,7 @@ const clear = () => {
   background: #fff;
   display: flex;
   box-shadow: 0px 0 7px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   padding: 5px;
   .item {
     :deep(.image-box) {

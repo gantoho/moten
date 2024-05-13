@@ -10,6 +10,7 @@ export default {
   canvas: 'fluent:draw-image-24-regular',
 
   // 平台图标
+  allViewport: 'fluent:phone-desktop-24-regular',
   desktop: 'fluent:desktop-mac-32-regular',
   mobile: 'fluent:phone-16-regular',
   preview: 'fluent:open-20-filled',

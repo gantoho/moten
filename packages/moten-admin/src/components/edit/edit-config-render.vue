@@ -13,7 +13,6 @@
               v-if="getComponent(cItem.code)"
               :is="getComponent(cItem.code)"
               :data="cItem"
-              :form-data="{}"
               :viewport="edit.viewport"
               @callback="callback"
             />
