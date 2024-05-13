@@ -1,42 +1,40 @@
 <template>
   <div :class="classes">
-    <img v-if="src" v-bind="attributes" class="image" />
+    <mo-link v-if="src" :to="link" target="_blank">
+      <img v-bind="$attrs" :src="src" class="image" />
+    </mo-link>
     <div v-else class="no-image">
-      <de-empty description="暂无图片，请上传" />
+      <mo-empty description="暂无图片，请上传" />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from 'vue-demi'
+<script>
 import { createNamespace } from '@/utils/components'
-import { type propData, props } from './props'
-import DeEmpty from '../empty'
+import { props } from './props'
+import MoEmpty from '../empty'
+import MoLink from '../link'
 
 const { name, n } = createNamespace('image')
 
-export default defineComponent({
+export default {
   name,
   props,
-  components: { DeEmpty },
-  setup(props, context) {
-    const { src, link } = props.data as propData
-
-    const attributes = computed(() => ({
-      ...context.attrs,
-      src,
-    }))
-
-    const classes = computed(() => [n()])
-
-    return {
-      src,
-      attributes,
-      link,
-      classes,
-    }
+  components: { MoEmpty, MoLink },
+  computed: {
+    classes() {
+      return [n()]
+    },
+    link() {
+      const { viewport, data } = this
+      return data?.content?.link?.[viewport] || ''
+    },
+    src() {
+      const { viewport, data } = this
+      return data?.content?.src?.[viewport] || ''
+    },
   },
-})
+}
 </script>
 
 <style lang="scss" scoped>

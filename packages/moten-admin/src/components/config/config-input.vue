@@ -1,7 +1,7 @@
 <template>
   <div class="config-input">
     <el-form-item size="small" :label="label">
-      <el-input v-model="input" style="width: 240px" :placeholder="placeholder" />
+      <el-input v-model="input" :placeholder="placeholder" />
     </el-form-item>
   </div>
 </template>
@@ -23,8 +23,18 @@ const props = defineProps({
 const emit = defineEmits(['callback'])
 
 const { data } = toRefs(props)
-const { label, placeholder, defaultValue, parentKey, key, id } = data.value
-const input = ref(defaultValue || '')
+const { label, placeholder, formData, defaultValue, parentKey, key, id } = data.value
+const input = ref('')
+
+watch(
+  () => formData,
+  (value) => {
+    input.value = value?.[props.viewport] || defaultValue || ''
+  },
+  {
+    immediate: true,
+  },
+)
 
 watch(input, (value) => {
   emit('callback', {

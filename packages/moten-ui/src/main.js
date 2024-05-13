@@ -1,17 +1,15 @@
-import { type App } from 'vue-demi'
-
 import '@/assets/styles/index.scss'
 
-import DeImage from '@/components/image'
-import DeColumn from '@/components/column'
+import MoImage from '@/components/image'
+import MoColumn from '@/components/column'
 
 import imageSchema from '@/components/image/schema'
 import columnSchema from '@/components/column/schema'
 import { COMPONENT_PREFIX as componentPrefix } from '@/config'
 
-const components = [DeImage, DeColumn]
+const components = [MoImage, MoColumn]
 
-const install = (app: App) => {
+const install = (app) => {
   components.forEach((component) => {
     const { name } = component
     if (name) app.component(name, component)
@@ -25,4 +23,4 @@ export const schema = {
 
 export const COMPONENT_PREFIX = componentPrefix
 
-export default { install, DeImage }
+export default { install, MoImage, MoColumn }

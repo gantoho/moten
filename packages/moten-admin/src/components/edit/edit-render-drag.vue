@@ -32,6 +32,7 @@
             :key="element.id"
             :data="element.formData"
             :list="element.children"
+            :viewport="edit.viewport"
           >
             <template #default="{ item, index }">
               <edit-render-drag
@@ -61,7 +62,11 @@
               @clear="clear"
             />
           </transition>
-          <component :is="renderComponentCode(element)" :data="element.formData" />
+          <component
+            :is="renderComponentCode(element)"
+            :data="element.formData"
+            :viewport="edit.viewport"
+          />
         </div>
       </div>
     </template>

@@ -7,7 +7,7 @@ export default Type.Object({
     }),
     display: Type.String({
       code: 'config-viewport',
-      label: '终端',
+      label: '屏幕',
       defaultValue: 'all',
     }),
     src: Type.String({
