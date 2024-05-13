@@ -1,6 +1,6 @@
 <template>
   <div :class="classes">
-    <img v-if="src" v-bind="attributes" class="image" :style="styles" />
+    <img v-if="src" v-bind="attributes" class="image" />
     <div v-else class="no-image">
       <de-empty description="暂无图片，请上传" />
     </div>
@@ -20,21 +20,19 @@ export default defineComponent({
   props,
   components: { DeEmpty },
   setup(props, context) {
-    const { src, alt, mode } = props.data as propData
+    const { src, link } = props.data as propData
 
     const attributes = computed(() => ({
       ...context.attrs,
       src,
-      alt,
     }))
 
-    const styles = computed(() => ({ objectFit: mode }))
     const classes = computed(() => [n()])
 
     return {
       src,
       attributes,
-      styles,
+      link,
       classes,
     }
   },

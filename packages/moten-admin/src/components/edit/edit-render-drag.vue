@@ -127,14 +127,14 @@ const copy = (id: string) => {
   const blockConfig = markRaw(edit.blockConfig)
   const newBlockConfig = handleNodeById(blockConfig, id, 'copy')
   edit.setCurrentSelect(null)
-  edit.setBlockConfigTemp(newBlockConfig)
+  edit.setBlockConfig(newBlockConfig)
 }
 const clear = (id: string) => {
   if (!edit.blockConfig) return
   const blockConfig = markRaw(edit.blockConfig)
   const newBlockConfig = handleNodeById(blockConfig, id, 'clear')
   edit.setCurrentSelect(null)
-  edit.setBlockConfigTemp(newBlockConfig)
+  edit.setBlockConfig(newBlockConfig)
 }
 </script>
 

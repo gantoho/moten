@@ -23,11 +23,11 @@ watch(
     deep: true,
   },
 )
+
 watch(
-  () => edit.blockConfigTemp,
+  () => edit.blockConfig,
   (val: any) => {
     list.value = val
-    edit.setBlockConfig(val)
   },
   {
     deep: true,

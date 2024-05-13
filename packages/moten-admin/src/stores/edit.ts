@@ -12,7 +12,6 @@ export const useEditStore = defineStore('edit', {
       currentSelect: null as BaseBlocksTypeNull,
       pageConfig: null as object | null,
       blockConfig: null as BlockConfigTypeNull,
-      blockConfigTemp: null as BlockConfigTypeNull,
       viewport: 'desktop' as ViewportType,
       rightPanelShow: false,
     }
@@ -26,9 +25,6 @@ export const useEditStore = defineStore('edit', {
     },
     setBlockConfig(value: BlockConfigTypeNull) {
       this.blockConfig = value
-    },
-    setBlockConfigTemp(value: BlockConfigTypeNull) {
-      this.blockConfigTemp = value
     },
     setPageConfig(value: object) {
       this.pageConfig = value

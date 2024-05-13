@@ -4,20 +4,14 @@ export interface propData {
    */
   src?: string
   /**
-   * 图片模式
-   * 遵循 img 标签 object-fit 属性
+   * 图片链接
    */
-  mode?: 'cover' | 'fill' | 'contain' | 'none' | 'scale-down'
-  /**
-   * 图片描述
-   */
-  alt?: string
+  link?: string
 }
 
 export const propDataDefaults = {
   src: '',
-  mode: 'cover',
-  alt: '',
+  link: '',
 }
 
 export const props = {
