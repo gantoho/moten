@@ -1,16 +1,12 @@
 <template>
-  <a v-if="isExternalLink" :class="classes" v-bind="$attr" :href="to" :target="target">
+  <component :is="tag" :class="classes" v-bind="$attr" :href="to" :to="to" :target="target">
     <slot />
-  </a>
-  <router-link v-else v-bind="$attr" :to="to">
-    <slot />
-  </router-link>
+  </component>
 </template>
 
 <script>
 import { createNamespace } from '@/utils/components'
 import { props } from './props'
-import { RouterLink } from 'vue-router'
 
 const { name, n } = createNamespace('link')
 
@@ -18,6 +14,10 @@ export default {
   name,
   props,
   computed: {
+    tag() {
+      if (!this.to) return 'span'
+      return this.isExternalLink ? 'a' : 'router-link'
+    },
     classes() {
       return [n()]
     },

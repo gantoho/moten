@@ -8,7 +8,7 @@
 
 ```vue
 <template>
-  <de-image src="https://via.placeholder.com/100" alt="占位图片" mode="cover" />
+  <mo-image src="https://via.placeholder.com/100" alt="占位图片" mode="cover" />
 </template>
 <script setup>
 import { DeImage } from '@moten/ui'

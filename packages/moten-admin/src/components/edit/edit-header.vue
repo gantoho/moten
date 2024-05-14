@@ -19,11 +19,11 @@
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { useEditStore, viewportType } from '@/stores/edit'
+import { useEditStore, type ViewportType } from '@/stores/edit'
 
 const edit = useEditStore()
 
-const viewport = ref<viewportType>('desktop')
+const viewport = ref<ViewportType>('desktop')
 
 watch(viewport, (val) => {
   edit.setViewport(val)
