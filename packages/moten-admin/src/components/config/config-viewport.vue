@@ -1,6 +1,6 @@
 <template>
   <div class="config-viewport">
-    <el-form-item size="small" :label="label">
+    <el-form-item :label="label">
       <config-base-tab :data="list" @change="change">
         <template #default="{ item }">
           <v-icon :src="item.icon" :content="item.content" />
@@ -57,10 +57,15 @@ const defaultValueIndex = list.value.findIndex((v) => v.value === _formData || d
 list.value[defaultValueIndex].default = true
 
 const change = (value: string) => {
+  let data = {}
+  const _value = value || ''
+  if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
+  else data = { [props.viewport]: _value }
+
   emit('callback', {
     data: {
       [parentKey]: {
-        [key]: value,
+        [key]: data,
       },
     },
     id,

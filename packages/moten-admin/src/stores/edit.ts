@@ -13,7 +13,7 @@ export const useEditStore = defineStore('edit', {
       pageConfig: null as object | null,
       blockConfig: null as BlockConfigTypeNull,
       viewport: 'desktop' as ViewportType,
-      rightPanelShow: false,
+      configPanelShow: false,
     }
   },
   getters: {
@@ -32,8 +32,8 @@ export const useEditStore = defineStore('edit', {
     setViewport(value: ViewportType) {
       this.viewport = value
     },
-    setRightPanelShow(value: boolean) {
-      this.rightPanelShow = value
+    setConfigPanelShow(value: boolean) {
+      this.configPanelShow = value
     },
   },
 })

@@ -39,7 +39,7 @@ const tabClick = (item: any) => {
 .config-base-tab {
   .container {
     width: 100%;
-    background: #f3f5f7;
+    background: var(--color-config-block-bg);
     border-radius: var(--border-radius);
     .list {
       display: flex;

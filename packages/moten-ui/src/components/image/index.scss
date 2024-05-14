@@ -2,6 +2,7 @@
   .image {
     width: 100%;
     display: block;
+    object-fit: cover;
     @include res(height, 295, 295);
   }
   .no-image {

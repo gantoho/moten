@@ -1,7 +1,7 @@
 <template>
   <div :class="classes">
     <mo-link v-if="src" :to="link" target="_blank">
-      <img v-bind="$attrs" :src="src" class="image" />
+      <img v-bind="$attrs" :src="src" class="image" :style="style" />
     </mo-link>
     <div v-else class="no-image">
       <mo-empty description="暂无图片，请上传" />
@@ -32,6 +32,20 @@ export default {
     src() {
       const { viewport, data } = this
       return data?.content?.src?.[viewport] || ''
+    },
+    width() {
+      const { viewport, data } = this
+      return data?.style?.width?.[viewport] || ''
+    },
+    height() {
+      const { viewport, data } = this
+      return data?.style?.height?.[viewport] || ''
+    },
+    style() {
+      return {
+        width: this.width,
+        height: this.height,
+      }
     },
   },
 }

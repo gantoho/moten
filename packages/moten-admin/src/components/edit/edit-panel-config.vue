@@ -1,9 +1,9 @@
 <template>
-  <div class="edit-panel-config" ref="target" :class="{ 'is-show': edit.rightPanelShow }">
+  <div class="edit-panel-config" ref="target" :class="{ 'is-show': edit.configPanelShow }">
     <div class="icon-group">
       <v-icon
         :src="icon.expand"
-        :content="edit.rightPanelShow ? '收起侧边栏' : '展开侧边栏'"
+        :content="edit.configPanelShow ? '收起侧边栏' : '展开侧边栏'"
         @click.native="panelRightSwitch"
       />
     </div>
@@ -31,14 +31,14 @@ const tabActiveName = ref('page')
 const target = ref(null)
 
 onClickOutside(target, () => {
-  if (!edit.isMobileViewport) edit.setRightPanelShow(false)
+  if (!edit.isMobileViewport) edit.setConfigPanelShow(false)
 })
 
 watch(
   () => edit.currentSelect,
   (value) => {
     if (value) {
-      edit.setRightPanelShow(true)
+      edit.setConfigPanelShow(true)
       tabActiveName.value = 'component'
     } else {
       tabActiveName.value = 'page'
@@ -46,14 +46,14 @@ watch(
   },
 )
 watch(
-  () => edit.rightPanelShow,
+  () => edit.configPanelShow,
   (value) => {
     if (!value) edit.setCurrentSelect(null)
   },
 )
 
 const panelRightSwitch = () => {
-  edit.setRightPanelShow(!edit.rightPanelShow)
+  edit.setConfigPanelShow(!edit.configPanelShow)
 }
 </script>
 

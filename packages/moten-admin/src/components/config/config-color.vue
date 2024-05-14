@@ -1,12 +1,11 @@
 <template>
   <div class="config-color">
-    <el-form-item size="small" :label="label">
+    <el-form-item :label="label">
       <el-button
         v-for="(item, index) in colorType"
         :key="index"
         :type="isSelected(item.code)"
         plain
-        size="small"
         @click="selectType(item.code)"
       >
         {{ item.name }}

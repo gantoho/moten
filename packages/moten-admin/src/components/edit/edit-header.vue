@@ -5,7 +5,7 @@
         <v-icon content="返回">
           <el-icon><ArrowLeft /></el-icon>
         </v-icon>
-        <div class="header-title">导航栏</div>
+        <div class="header-title">页面</div>
       </div>
 
       <div class="line"></div>
@@ -27,8 +27,7 @@ const viewport = ref<ViewportType>('desktop')
 
 watch(viewport, (val) => {
   edit.setViewport(val)
-  if (val === 'mobile') edit.setRightPanelShow(true)
-  else edit.setRightPanelShow(false)
+  edit.setConfigPanelShow(val === 'mobile')
 })
 </script>
 

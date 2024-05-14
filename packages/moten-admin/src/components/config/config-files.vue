@@ -1,65 +1,98 @@
 <template>
-  <div class="config-background">
-    <el-form-item size="small" :label="label">
-      <el-button
-        v-for="(item, index) in backgroundType"
-        :key="index"
-        :type="isSelected(item.code)"
-        plain
-        size="small"
-        @click="selectType(item.code)"
-      >
-        {{ item.name }}
-      </el-button>
-      <div v-if="selectBackgroundType === 'color'">这里会渲染颜色选择器</div>
+  <div class="config-files">
+    <el-form-item :label="label">
+      <img v-if="url" :src="url" class="image" @click="fileClick" />
+      <div v-else class="file" @click="fileClick">
+        <Icon :icon="icon.upload" class="icon" />
+      </div>
     </el-form-item>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, watch } from 'vue'
+import { Icon } from '@iconify/vue'
+import icon from '@/config/icon'
 
 const props = defineProps({
   data: {
     type: Object,
     default: () => {},
   },
-  formData: {
-    type: Object,
-    default: () => {},
+  viewport: {
+    type: String,
+    default: 'desktop',
   },
 })
 
 const emit = defineEmits(['callback'])
 
-const { data, formData } = toRefs(props)
-const { label, defaultValue } = data.value
+const { data } = toRefs(props)
+const { label, formData, defaultValue, parentKey, key, id } = data.value
+const url = ref('')
 
-const backgroundType = ref([
-  { code: 'no', name: '无' },
-  { code: 'color', name: '颜色' },
-])
-const selectBackgroundType = ref(backgroundType.value[0].code)
+watch(
+  () => formData,
+  (value) => {
+    url.value = value?.[props.viewport] || defaultValue || ''
+  },
+  {
+    immediate: true,
+  },
+)
 
-const isSelected = (code: string) => {
-  return selectBackgroundType.value === code ? 'primary' : ''
-}
-
-const init = () => {}
-const initSet = () => {}
-const selectType = (code: string) => {
-  selectBackgroundType.value = code
+watch(url, (value) => {
+  let data = {}
+  const _value = value || ''
+  if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
+  else data = { [props.viewport]: _value }
 
   emit('callback', {
-    background: code === 'no' ? '' : 'red',
+    data: {
+      [parentKey]: {
+        [key]: data,
+      },
+    },
+    id,
   })
+})
+
+const fileClick = () => {
+  // TODO 测试
+  const list = [
+    'https://gips2.baidu.com/it/u=600796006,4247107674&fm=3042&app=3042&f=JPEG&wm=1,huayi,0,0,13,9&wmo=0,0',
+    'https://gips2.baidu.com/it/u=195724436,3554684702&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960',
+    'https://gips0.baidu.com/it/u=3554802836,624793446&fm=3042&app=3042&f=JPEG&wm=1,huayi,0,0,13,9&wmo=0,0',
+    'https://gips2.baidu.com/it/u=3681636179,223758822&fm=3042&app=3042&f=JPEG&wm=1,huayi,0,0,13,9&wmo=0,0',
+  ]
+  const randomIndex = Math.floor(Math.random() * list.length)
+  url.value = list[randomIndex]
 }
 </script>
 
 <style lang="scss" scoped>
-.config-background {
-  :deep(.el-button) {
+.config-files {
+  .file,
+  .image {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed var(--color-border);
     border-radius: var(--border-radius);
+    background: var(--color-config-block-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .image {
+    border: 0;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+  }
+  .icon {
+    width: 20px;
+    height: 20px;
   }
 }
 </style>

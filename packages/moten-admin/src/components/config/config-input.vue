@@ -1,7 +1,7 @@
 <template>
   <div class="config-input">
-    <el-form-item size="small" :label="label">
-      <el-input v-model="input" :placeholder="placeholder" />
+    <el-form-item :label="label">
+      <el-input v-model="input" :placeholder="placeholder" class="input" />
     </el-form-item>
   </div>
 </template>
@@ -37,12 +37,15 @@ watch(
 )
 
 watch(input, (value) => {
+  let data = {}
+  const _value = value || ''
+  if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
+  else data = { [props.viewport]: _value }
+
   emit('callback', {
     data: {
       [parentKey]: {
-        [key]: {
-          [props.viewport]: value || '',
-        },
+        [key]: data,
       },
     },
     id,
@@ -52,8 +55,8 @@ watch(input, (value) => {
 
 <style lang="scss" scoped>
 .config-input {
-  :deep(.el-button) {
-    border-radius: var(--border-radius);
+  :deep(.el-input__wrapper) {
+    background: var(--color-config-block-bg);
   }
 }
 </style>

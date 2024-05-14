@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="classes" v-bind="$attr" :href="to" :to="to" :target="target">
+  <component :is="tag" :class="classes" v-bind="$attrs" :href="to" :to="to" :target="target">
     <slot />
   </component>
 </template>
@@ -14,12 +14,12 @@ export default {
   name,
   props,
   computed: {
+    classes() {
+      return [n()]
+    },
     tag() {
       if (!this.to) return 'span'
       return this.isExternalLink ? 'a' : 'router-link'
-    },
-    classes() {
-      return [n()]
     },
     isExternalLink() {
       return (

@@ -1,5 +1,5 @@
 <template>
-  <el-form-item size="small" :label="label">
+  <el-form-item :label="label">
     <quill-editor
       ref="richRefs"
       :toolbar="toolbar"
