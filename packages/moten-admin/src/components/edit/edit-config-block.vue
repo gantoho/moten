@@ -2,19 +2,26 @@
   <div class="edit-config-block">
     <edit-config-render :list="list" @callback="callback">
       <div v-if="!edit.currentSelect">
-        <el-empty description="请在左侧拖入组件后，点击选中组件" />
+        <el-empty description="请在左侧拖入组件后，点击选中组件">
+          <template #image>
+            <Icon :icon="icon.dragBlank" class="icon" />
+          </template>
+        </el-empty>
       </div>
     </edit-config-render>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import deepmerge from 'deepmerge'
 import { omit } from 'lodash'
+import { ref, watch } from 'vue'
 import { blockSchema } from '@/config/schema'
 import { useEditStore } from '@/stores/edit'
-import deepmerge from 'deepmerge'
 import { findNodeById } from './nested'
+import { Icon } from '@iconify/vue'
+import icon from '@/config/icon'
+
 const edit = useEditStore()
 
 const list = ref<any[]>([])

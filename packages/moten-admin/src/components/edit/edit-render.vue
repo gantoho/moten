@@ -1,7 +1,11 @@
 <template>
   <div class="edit-render" :style="pageStyle" :class="pageClass">
     <edit-render-drag :list="list" :group="dragGroup" class="render" />
-    <el-empty class="empty" v-if="!list.length" description="请在左侧拖入组件到此处" />
+    <el-empty class="empty" v-if="!list.length" description="请在左侧拖入组件到此处">
+      <template #image>
+        <Icon :icon="icon.dragBlank" class="icon" />
+      </template>
+    </el-empty>
   </div>
 </template>
 
@@ -9,6 +13,8 @@
 import { ref, watch, computed } from 'vue'
 import { dragGroup } from './nested'
 import { useEditStore } from '@/stores/edit'
+import { Icon } from '@iconify/vue'
+import icon from '@/config/icon'
 
 const edit = useEditStore()
 

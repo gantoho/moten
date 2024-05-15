@@ -29,4 +29,5 @@ export default {
   copy: 'fluent:save-copy-24-regular',
   delete: 'fluent:delete-24-regular',
   drag: 'fluent:grid-dots-20-regular',
+  dragBlank: 'fluent:breakout-room-20-regular',
 }
