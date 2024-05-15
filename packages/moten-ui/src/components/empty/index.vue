@@ -5,25 +5,30 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { computed, defineComponent, toRefs } from 'vue-demi'
+import noDataIcon from '@/assets/images/no-data.png'
 import { createNamespace } from '@/utils/components'
 import { props } from './props'
-import noDataIcon from '@/assets/images/no-data.png'
 
 const { name, n } = createNamespace('empty')
 
-export default {
+export default defineComponent({
   name,
   props,
-  computed: {
-    classes() {
-      return [n()]
-    },
-    src() {
-      return this.image || noDataIcon
-    },
+  setup(props) {
+    const { image, description } = toRefs(props)
+
+    const classes = computed(() => [n()])
+    const src = computed(() => image.value || noDataIcon)
+
+    return {
+      classes,
+      src,
+      description,
+    }
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

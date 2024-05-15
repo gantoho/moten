@@ -1,15 +1,18 @@
 import { defineStore } from 'pinia'
-import { baseBlocks } from '@/config/blocks'
+import { baseBlocks, seniorBlocks } from '@/config/blocks'
 
-export type BaseBlocksType = typeof baseBlocks
+export type BaseBlocksType = typeof baseBlocks & typeof seniorBlocks
+export type BaseBlockType = BaseBlocksType[number]
 export type BaseBlocksTypeNull = BaseBlocksType | null
+export type BaseBlockTypeNull = BaseBlockType | null
 export type ViewportType = 'mobile' | 'desktop'
-export type BlockConfigTypeNull = Array<BaseBlocksType> | null
+export type BlockConfigTypeNull = BaseBlockType[] | null
+export type BlockConfigType = BaseBlockType[]
 
 export const useEditStore = defineStore('edit', {
   state: () => {
     return {
-      currentSelect: null as BaseBlocksTypeNull,
+      currentSelect: null as BaseBlockTypeNull,
       pageConfig: null as object | null,
       blockConfig: null as BlockConfigTypeNull,
       viewport: 'desktop' as ViewportType,
@@ -20,7 +23,7 @@ export const useEditStore = defineStore('edit', {
     isMobileViewport: (state) => state.viewport === 'mobile',
   },
   actions: {
-    setCurrentSelect(value: BaseBlocksTypeNull) {
+    setCurrentSelect(value: BaseBlockTypeNull) {
       this.currentSelect = value
     },
     setBlockConfig(value: BlockConfigTypeNull) {

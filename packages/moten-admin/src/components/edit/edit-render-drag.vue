@@ -74,9 +74,9 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, markRaw, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { nestedClass, move, findNodeById, replaceNodeId } from './nested'
-import { useEditStore } from '@/stores/edit'
+import { type BlockConfigType, useEditStore } from '@/stores/edit'
 import { COMPONENT_PREFIX } from '@/config/config'
 
 const edit = useEditStore()
@@ -114,13 +114,13 @@ const renderComponentCode = computed(() => {
 })
 const activeClass = computed(() => {
   return (element: { id: string }) => {
-    const id: string | null = (edit.currentSelect as any)?.id
+    const id = edit.currentSelect?.id || ''
     return { 'is-active': element.id === id }
   }
 })
 
-const handleNodeById = (arr: Array<any>, nodeId: string, type: 'copy' | 'clear') => {
-  return findNodeById(arr, nodeId, (params: any) => {
+const handleNodeById = (arr: BlockConfigType, nodeId: string, type: 'copy' | 'clear') => {
+  return findNodeById(arr, nodeId, (params) => {
     const { array, node, index } = params
     if (type === 'copy') array.splice(index, 0, replaceNodeId(node))
     if (type === 'clear') array.splice(index, 1)
@@ -129,15 +129,13 @@ const handleNodeById = (arr: Array<any>, nodeId: string, type: 'copy' | 'clear')
 
 const copy = (id: string) => {
   if (!edit.blockConfig) return
-  const blockConfig = markRaw(edit.blockConfig)
-  const newBlockConfig = handleNodeById(blockConfig, id, 'copy')
+  const newBlockConfig = handleNodeById(edit.blockConfig, id, 'copy')
   edit.setCurrentSelect(null)
   edit.setBlockConfig(newBlockConfig)
 }
 const clear = (id: string) => {
   if (!edit.blockConfig) return
-  const blockConfig = markRaw(edit.blockConfig)
-  const newBlockConfig = handleNodeById(blockConfig, id, 'clear')
+  const newBlockConfig = handleNodeById(edit.blockConfig, id, 'clear')
   edit.setCurrentSelect(null)
   edit.setBlockConfig(newBlockConfig)
 }

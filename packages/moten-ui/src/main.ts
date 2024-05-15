@@ -9,7 +9,7 @@ import { COMPONENT_PREFIX as componentPrefix } from '@/config'
 
 const components = [MoImage, MoColumn]
 
-const install = (app) => {
+const install = (app: any) => {
   components.forEach((component) => {
     const { name } = component
     if (name) app.component(name, component)

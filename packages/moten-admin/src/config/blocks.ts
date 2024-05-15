@@ -2,6 +2,17 @@ import icon from '@/config/icon'
 
 const { row, column, image, video, text, swiper, blank, canvas } = icon
 
+// TODO 待完善
+export interface BaseBlocksType {
+  id: string
+  name: string
+  code: string
+  icon: string
+  nested?: boolean
+  children?: BaseBlocksType[]
+  formData: object
+}
+
 export const baseBlocks = [
   {
     id: '',

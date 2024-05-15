@@ -4,31 +4,36 @@
   </component>
 </template>
 
-<script>
+<script lang="ts">
+import { computed, defineComponent, toRefs } from 'vue-demi'
 import { createNamespace } from '@/utils/components'
 import { props } from './props'
 
 const { name, n } = createNamespace('link')
 
-export default {
+export default defineComponent({
   name,
   props,
-  computed: {
-    classes() {
-      return [n()]
-    },
-    tag() {
-      if (!this.to) return 'span'
-      return this.isExternalLink ? 'a' : 'router-link'
-    },
-    isExternalLink() {
-      return (
-        typeof this.to === 'string' &&
-        this.to.match(/^(http:\/\/|https:\/\/|javascript:.*|tel:.*|mailto:.*)/)
-      )
-    },
+  setup(props) {
+    const { to, target } = toRefs(props)
+
+    const classes = computed(() => [n()])
+    const isExternalLink = computed(() =>
+      to.value.match(/^(http:\/\/|https:\/\/|javascript:.*|tel:.*|mailto:.*)/),
+    )
+    const tag = computed(() => {
+      if (!to.value) return 'span'
+      return isExternalLink.value ? 'a' : 'router-link'
+    })
+
+    return {
+      classes,
+      tag,
+      target,
+      to,
+    }
   },
-}
+})
 </script>
 
 <style lang="scss" scoped>

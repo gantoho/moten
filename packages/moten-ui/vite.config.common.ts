@@ -15,7 +15,7 @@ export default {
     outDir: `dist/${name}`,
     lib: {
       // 组件库源码的入口文件
-      entry: resolve(__dirname, 'src/main.js'),
+      entry: resolve(__dirname, 'src/main.ts'),
       // 组件库名称
       name: 'moten',
       // 文件名称, 打包结果举例: [my-packages].umd.cjs

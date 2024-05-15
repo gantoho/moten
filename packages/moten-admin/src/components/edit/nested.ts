@@ -1,3 +1,4 @@
+import { BlockConfigTypeNull, BlockConfigType } from '@/stores/edit'
 import { nanoid } from '@/utils/index'
 import { cloneDeep, isEqual } from 'lodash'
 
@@ -43,7 +44,17 @@ export const replaceNodeId = (node: any) => {
   return clone(newNode)
 }
 
-export const findNodeById = (arr: any[], nodeId: string, callback: any) => {
+export interface FindNodeByIdCallBack {
+  array: BlockConfigType
+  node: BlockConfigType[number]
+  index: number
+}
+
+export const findNodeById = (
+  arr: BlockConfigTypeNull,
+  nodeId: string,
+  callback: (params: FindNodeByIdCallBack) => void,
+) => {
   if (!arr) return arr
   const array = cloneDeep(arr)
   for (let i = 0; i < array.length; i++) {

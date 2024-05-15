@@ -1,7 +1,7 @@
 <template>
   <div class="edit-render" :style="pageStyle" :class="pageClass">
     <edit-render-drag :list="list" :group="dragGroup" class="render" />
-    <el-empty class="empty" v-if="!list.length" description="请在左侧拖入组件到此处">
+    <el-empty class="empty" v-if="!list?.length" description="请在左侧拖入组件到此处">
       <template #image>
         <Icon :icon="icon.dragBlank" class="icon" />
       </template>
@@ -12,17 +12,17 @@
 <script lang="ts" setup>
 import { ref, watch, computed } from 'vue'
 import { dragGroup } from './nested'
-import { useEditStore } from '@/stores/edit'
+import { BlockConfigTypeNull, useEditStore } from '@/stores/edit'
 import { Icon } from '@iconify/vue'
 import icon from '@/config/icon'
 
 const edit = useEditStore()
 
-const list = ref([])
+const list = ref<BlockConfigTypeNull>(null)
 
 watch(
-  list.value,
-  (val: any) => {
+  () => list.value,
+  (val) => {
     edit.setBlockConfig(val)
   },
   {
@@ -32,7 +32,7 @@ watch(
 
 watch(
   () => edit.blockConfig,
-  (val: any) => {
+  (val) => {
     list.value = val
   },
   {
