@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRefs } from 'vue'
+import { ref, toRefs, watch } from 'vue'
 import icon from '@/config/icon'
 
 const props = defineProps({
@@ -28,9 +28,17 @@ const props = defineProps({
 const emit = defineEmits(['callback'])
 
 const { data } = toRefs(props)
-const { label, defaultValue, parentKey, key, id, formData } = data.value
+const { parentKey, key, id, formData } = data.value
+const { label, defaultValue } = data.value.properties[props.viewport]
 
-const list = ref([
+interface ViewportListType {
+  icon: string
+  content: string
+  value: 'all' | 'mobile' | 'desktop'
+  default: boolean
+}
+
+const list = ref<ViewportListType[]>([
   {
     icon: icon.allViewport,
     content: '多端显示',
@@ -51,26 +59,40 @@ const list = ref([
   },
 ])
 
-// TODO
-const _formData = formData?.[parentKey]?.[key] || ''
-const defaultValueIndex = list.value.findIndex((v) => v.value === _formData || defaultValue)
-list.value[defaultValueIndex].default = true
-
-const change = (value: string) => {
-  let data = {}
-  const _value = value || ''
-  if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
-  else data = { [props.viewport]: _value }
-
+const callback = (value: any) => {
   emit('callback', {
     data: {
       [parentKey]: {
-        [key]: data,
+        [key]: value,
       },
     },
     id,
   })
 }
+const change = (value: ViewportListType['value']) => {
+  const rules = {
+    all: { desktop: true, mobile: true },
+    desktop: { desktop: true, mobile: false },
+    mobile: { desktop: false, mobile: true },
+  }
+  callback(rules[value])
+}
+watch(
+  () => formData,
+  (value) => {
+    const _formData = value?.[parentKey]?.[key]
+    const defaultValueIndex = Math.max(
+      list.value.findIndex((v) => v.value === _formData || defaultValue),
+      0,
+    )
+    list.value[defaultValueIndex].default = true
+
+    change(list.value[defaultValueIndex].value)
+  },
+  {
+    immediate: true,
+  },
+)
 </script>
 
 <style lang="scss" scoped>

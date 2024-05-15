@@ -2,14 +2,16 @@ import icon from '@/config/icon'
 
 const { row, column, image, video, text, swiper, blank, canvas } = icon
 
-// TODO 待完善
-export interface BaseBlocksType {
+export interface BaseBlockType {
   id: string
   name: string
   code: string
   icon: string
   nested?: boolean
-  children?: BaseBlocksType[]
+  children?: {
+    desktop: BaseBlockType[][]
+    mobile: BaseBlockType[][]
+  }
   formData: object
 }
 
@@ -58,7 +60,10 @@ export const seniorBlocks = [
     code: 'row',
     icon: row,
     nested: true,
-    children: [[], []],
+    children: {
+      desktop: [[], []],
+      mobile: [[], []],
+    },
     formData: {},
   },
   {
@@ -67,7 +72,10 @@ export const seniorBlocks = [
     code: 'column',
     icon: column,
     nested: true,
-    children: [[], []],
+    children: {
+      desktop: [[], []],
+      mobile: [[], []],
+    },
     formData: {},
   },
   {
@@ -76,7 +84,10 @@ export const seniorBlocks = [
     code: 'canvas',
     icon: canvas,
     nested: true,
-    children: [[], []],
+    children: {
+      desktop: [[], []],
+      mobile: [[], []],
+    },
     formData: {},
   },
 ]

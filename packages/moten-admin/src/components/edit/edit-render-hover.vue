@@ -1,6 +1,6 @@
 <template>
   <div class="edit-render-hover">
-    <v-icon :src="icon.drag" content="按住拖动" class="item drag" />
+    <v-icon :src="icon.drag" :content="'按住拖动' + name" class="item drag" />
     <v-icon :src="icon.copy" content="复制" class="item" @click.stop.native="copy" />
     <v-icon :src="icon.delete" content="删除" class="item" @click.stop.native="clear" />
   </div>
@@ -11,6 +11,10 @@ import icon from '@/config/icon'
 
 const props = defineProps({
   id: {
+    type: String,
+    default: '',
+  },
+  name: {
     type: String,
     default: '',
   },

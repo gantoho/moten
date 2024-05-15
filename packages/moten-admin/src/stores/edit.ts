@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
-import { baseBlocks, seniorBlocks } from '@/config/blocks'
+import { BaseBlockType } from '@/config/blocks'
 
-export type BaseBlocksType = typeof baseBlocks & typeof seniorBlocks
-export type BaseBlockType = BaseBlocksType[number]
+export type BaseBlocksType = BaseBlockType[]
 export type BaseBlocksTypeNull = BaseBlocksType | null
 export type BaseBlockTypeNull = BaseBlockType | null
 export type ViewportType = 'mobile' | 'desktop'

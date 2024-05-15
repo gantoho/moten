@@ -17,14 +17,12 @@ export default defineComponent({
   name,
   props,
   setup(props) {
-    const { data, viewport } = toRefs(props)
-    const { content, style } = data.value
+    const { data, viewport, list } = toRefs(props)
 
     const classes = computed(() => [n()])
-    const cols = computed(() => content?.cols?.[viewport.value])
-    const list = computed(() => content?.list?.[viewport.value])
-    const item = computed(() => (index: number) => list.value?.[index] || {})
-    const background = computed(() => style?.background?.[viewport.value])
+    const item = computed(() => (index: number) => list.value?.[viewport.value]?.[index] || {})
+    const cols = computed(() => data.value?.content?.cols?.[viewport.value] || [0.5, 0.5])
+    const background = computed(() => data.value?.style?.background?.[viewport.value])
     const styles = computed(() => ({ background: background.value }))
 
     return {

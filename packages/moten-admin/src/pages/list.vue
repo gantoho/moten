@@ -293,7 +293,6 @@ const searchInfo = (e: any) => {
     keywords: '',
   }
   if (e) params.keywords = e
-  // TODO
 }
 
 /**
@@ -314,7 +313,6 @@ const sortChange = (e: { prop: string; order: string }) => {
     }
   }
   tableLoading.value = true
-  // TODO
 }
 
 /**
@@ -334,7 +332,6 @@ const filterHandler = (e: any) => {
   }
 
   tableLoading.value = true
-  // TODO
 }
 
 /**
@@ -354,7 +351,6 @@ const paginationChange = (type: string, e: any) => {
   }
 
   tableLoading.value = true
-  // TODO
 }
 </script>
 

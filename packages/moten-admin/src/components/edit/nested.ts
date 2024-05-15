@@ -1,4 +1,4 @@
-import { BlockConfigTypeNull, BlockConfigType } from '@/stores/edit'
+import { BlockConfigTypeNull, BlockConfigType, ViewportType } from '@/stores/edit'
 import { nanoid } from '@/utils/index'
 import { cloneDeep, isEqual } from 'lodash'
 
@@ -53,6 +53,7 @@ export interface FindNodeByIdCallBack {
 export const findNodeById = (
   arr: BlockConfigTypeNull,
   nodeId: string,
+  viewport: ViewportType,
   callback: (params: FindNodeByIdCallBack) => void,
 ) => {
   if (!arr) return arr
@@ -68,14 +69,14 @@ export const findNodeById = (
       })
       return array
     }
-    if (node.children && node.children.length > 0) {
+    if (node.children && node.children[viewport].length > 0) {
       // 如果节点有子节点，则递归调用 findNodeById 函数
-      for (let j = 0; j < node.children.length; j++) {
-        if (!node.children[j].length) continue
-        const updatedChildren = findNodeById(node.children[j], nodeId, callback)
-        if (!isEqual(updatedChildren, node.children[j])) {
+      for (let j = 0; j < node.children[viewport].length; j++) {
+        if (!node.children[viewport][j].length) continue
+        const updatedChildren = findNodeById(node.children[viewport][j], nodeId, viewport, callback)
+        if (!isEqual(updatedChildren, node.children[viewport][j])) {
           // 如果子节点数组有更新，则更新当前节点的子节点数组
-          node.children[j] = updatedChildren
+          if (updatedChildren) node.children[viewport][j] = updatedChildren
           return array // 返回更新后的数组
         }
       }

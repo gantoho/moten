@@ -10,13 +10,6 @@ export interface MoColumnPropsData {
       desktop: number[]
       mobile: number[]
     }
-    /**
-     * 每列数据
-     */
-    list?: {
-      desktop: any[][]
-      mobile: any[][]
-    }
   }
   style?: {
     /**
@@ -27,6 +20,10 @@ export interface MoColumnPropsData {
       mobile: string
     }
   }
+}
+export interface MoColumnPropsList {
+  desktop: any[][]
+  mobile: any[][]
 }
 export const props = {
   /**
@@ -49,12 +46,15 @@ export const props = {
       },
     }),
   },
+  /**
+   * 每列数据
+   */
   list: {
-    type: Array,
-    default: {
+    type: Object as PropType<MoColumnPropsList>,
+    default: () => ({
       desktop: [[], []],
       mobile: [[], []],
-    },
+    }),
   },
   /**
    * 视口

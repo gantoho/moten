@@ -34,7 +34,8 @@ const callback = (params: any) => {
   const { data, id } = params
   if (id) return
   const formData = edit.pageConfig || {}
-  edit.setPageConfig(deepmerge(formData, data))
+  const overwriteMerge = (_destinationArray: any, sourceArray: any, _options: any) => sourceArray
+  edit.setPageConfig(deepmerge(formData, data, { arrayMerge: overwriteMerge }))
 }
 </script>
 

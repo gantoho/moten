@@ -1,3 +1,4 @@
+import { TSchema, Type } from '@sinclair/typebox'
 import { COMPONENT_PREFIX } from '@/config'
 import { type App } from 'vue-demi'
 
@@ -40,3 +41,10 @@ export function createNamespaceFn(prefix: string) {
 }
 
 export const createNamespace = createNamespaceFn(COMPONENT_PREFIX)
+
+export const schemaAllViewport = (params: TSchema) => {
+  return Type.Object({
+    desktop: params,
+    mobile: params,
+  })
+}

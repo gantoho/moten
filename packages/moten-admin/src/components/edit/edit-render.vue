@@ -18,7 +18,7 @@ import icon from '@/config/icon'
 
 const edit = useEditStore()
 
-const list = ref<BlockConfigTypeNull>(null)
+const list = ref<BlockConfigTypeNull>([])
 
 watch(
   () => list.value,

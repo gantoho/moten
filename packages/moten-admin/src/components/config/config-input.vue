@@ -23,13 +23,14 @@ const props = defineProps({
 const emit = defineEmits(['callback'])
 
 const { data } = toRefs(props)
-const { label, placeholder, formData, defaultValue, parentKey, key, id } = data.value
+const { formData, parentKey, key, id } = data.value
+const { label, defaultValue, placeholder } = data.value.properties[props.viewport]
 const input = ref('')
 
 watch(
   () => formData,
   (value) => {
-    input.value = value?.[props.viewport] || defaultValue || ''
+    input.value = value?.[props.viewport] || defaultValue
   },
   {
     immediate: true,

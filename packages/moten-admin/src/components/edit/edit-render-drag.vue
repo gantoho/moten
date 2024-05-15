@@ -23,6 +23,7 @@
             <edit-render-hover
               v-show="hoverId === element.id"
               :id="element.id"
+              :name="element.name"
               @copy="copy"
               @clear="clear"
             />
@@ -58,6 +59,7 @@
             <edit-render-hover
               v-show="hoverId === element.id"
               :id="element.id"
+              :name="element.name"
               @copy="copy"
               @clear="clear"
             />
@@ -120,7 +122,7 @@ const activeClass = computed(() => {
 })
 
 const handleNodeById = (arr: BlockConfigType, nodeId: string, type: 'copy' | 'clear') => {
-  return findNodeById(arr, nodeId, (params) => {
+  return findNodeById(arr, nodeId, edit.viewport, (params) => {
     const { array, node, index } = params
     if (type === 'copy') array.splice(index, 0, replaceNodeId(node))
     if (type === 'clear') array.splice(index, 1)

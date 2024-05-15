@@ -10,8 +10,8 @@
         >
           <div v-for="(cItem, cIndex) in item.list" :key="index + '-' + cIndex">
             <component
-              v-if="getComponent(cItem.code)"
-              :is="getComponent(cItem.code)"
+              v-if="getComponent(cItem)"
+              :is="getComponent(cItem)"
               :data="cItem"
               :viewport="edit.viewport"
               @callback="callback"
@@ -56,8 +56,10 @@ const callback = (data: any) => {
   emit('callback', data)
 }
 
-const getComponent = (code: string) =>
-  batchDynamicComponents(code, import.meta.glob('@/components/config/**/*.vue'))
+const getComponent = (item: any) => {
+  const code = item.properties[edit.viewport].code
+  return batchDynamicComponents(code, import.meta.glob('@/components/config/**/*.vue'))
+}
 </script>
 
 <style lang="scss" scoped>

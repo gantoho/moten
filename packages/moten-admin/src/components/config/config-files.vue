@@ -28,13 +28,14 @@ const props = defineProps({
 const emit = defineEmits(['callback'])
 
 const { data } = toRefs(props)
-const { label, formData, defaultValue, parentKey, key, id } = data.value
+const { formData, parentKey, key, id } = data.value
+const { label, defaultValue } = data.value.properties[props.viewport]
 const url = ref('')
 
 watch(
   () => formData,
   (value) => {
-    url.value = value?.[props.viewport] || defaultValue || ''
+    url.value = value?.[props.viewport] || defaultValue
   },
   {
     immediate: true,
@@ -58,7 +59,6 @@ watch(url, (value) => {
 })
 
 const fileClick = () => {
-  // TODO 测试
   const list = [
     'https://gips2.baidu.com/it/u=600796006,4247107674&fm=3042&app=3042&f=JPEG&wm=1,huayi,0,0,13,9&wmo=0,0',
     'https://gips2.baidu.com/it/u=195724436,3554684702&fm=3028&app=3028&f=JPEG&fmt=auto?w=1280&h=960',

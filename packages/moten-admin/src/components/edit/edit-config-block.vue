@@ -62,9 +62,25 @@ const callback = (params: any) => {
   const { data, id } = params
   if (!id) return
   const blockConfig = edit.blockConfig || []
-  const newBlockConfig = findNodeById(blockConfig, id, (params: any) => {
+  const newBlockConfig = findNodeById(blockConfig, id, edit.viewport, (params: any) => {
     let { array, index, node } = params
-    array[index].formData = deepmerge(node.formData, data)
+    const overwriteMerge = (_destinationArray: any, sourceArray: any, _options: any) => sourceArray
+    array[index].formData = deepmerge(node.formData, data, { arrayMerge: overwriteMerge })
+
+    if (node.code === 'column') {
+      const desktopCols = node.formData.content.cols.desktop
+      const mobileCols = node.formData.content.cols.mobile
+      const newDesktopCols = node.children.desktop
+      const newMobileCols = node.children.mobile
+      if (desktopCols.length > newDesktopCols.length) {
+        newDesktopCols.push(...desktopCols.slice(newDesktopCols.length).map((_: any) => []))
+        array[index].children.desktop = newDesktopCols
+      }
+      if (mobileCols.length > newMobileCols.length) {
+        newMobileCols.push(...mobileCols.slice(newMobileCols.length).map((_: any) => []))
+        array[index].children.mobile = newMobileCols
+      }
+    }
   })
   edit.setBlockConfig(newBlockConfig)
 }
@@ -75,3 +91,4 @@ const callback = (params: any) => {
   width: 100%;
 }
 </style>
+_destinationArray_options
