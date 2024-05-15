@@ -13,13 +13,18 @@
       <v-select v-model="viewport" />
     </div>
 
-    <div class="header-right"></div>
+    <div class="header-right">
+      <el-button> <Icon :icon="icon.preview" /> 预览 </el-button>
+      <el-button type="primary"> <Icon :icon="icon.publish" /> 发布 </el-button>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useEditStore, type ViewportType } from '@/stores/edit'
+import { Icon } from '@iconify/vue'
+import icon from '@/config/icon'
 
 const edit = useEditStore()
 
@@ -69,6 +74,7 @@ watch(viewport, (val) => {
   }
   .header-right {
     position: relative;
+    padding-right: 16px;
   }
 }
 </style>

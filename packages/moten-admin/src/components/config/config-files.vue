@@ -74,9 +74,9 @@ const fileClick = () => {
 .config-files {
   .file,
   .image {
-    width: 60px;
-    height: 60px;
-    border: 2px dashed var(--color-border);
+    width: 80px;
+    height: 80px;
+    border: 1px dashed var(--color-border);
     border-radius: var(--border-radius);
     background: var(--color-config-block-bg);
     display: flex;
@@ -86,13 +86,13 @@ const fileClick = () => {
   }
   .image {
     border: 0;
-    width: 64px;
-    height: 64px;
+    width: 82px;
+    height: 82px;
     object-fit: cover;
   }
   .icon {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   }
 }
 </style>

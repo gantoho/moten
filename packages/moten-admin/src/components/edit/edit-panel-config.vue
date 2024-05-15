@@ -62,8 +62,8 @@ const panelRightSwitch = () => {
   position: fixed;
   z-index: 200;
   top: var(--edit-header-height);
-  right: -240px;
-  width: 240px;
+  right: -280px;
+  width: 280px;
   background: white;
   border-left: 1px solid var(--color-border);
   transition: right 0.5s cubic-bezier(1, 0, 0.61, 1.01);

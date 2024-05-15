@@ -3,6 +3,7 @@
     width: 100%;
     display: block;
     object-fit: cover;
+    margin: 0 auto;
     @include res(height, 295, 295);
   }
   .no-image {

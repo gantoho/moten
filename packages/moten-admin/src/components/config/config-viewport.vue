@@ -3,7 +3,7 @@
     <el-form-item :label="label">
       <config-base-tab :data="list" @change="change">
         <template #default="{ item }">
-          <v-icon :src="item.icon" :content="item.content" />
+          <v-icon :src="item.icon" :content="item.content" class="icon" />
         </template>
       </config-base-tab>
     </el-form-item>
@@ -77,6 +77,12 @@ const change = (value: string) => {
 .config-viewport {
   :deep(.el-form-item) {
     align-items: center;
+  }
+  .icon {
+    :deep(.image-box) {
+      width: 30px;
+      height: 30px;
+    }
   }
 }
 </style>

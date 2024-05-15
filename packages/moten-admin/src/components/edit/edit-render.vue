@@ -53,7 +53,6 @@ computed
   margin-left: var(--edit-panel-block-width);
   margin-top: var(--edit-header-height);
   background: white;
-  transition: all 0.3s ease;
   &.is-mobile {
     width: 375px;
     overflow: hidden;
@@ -62,7 +61,6 @@ computed
     margin-top: calc(var(--edit-header-height) + 20px);
     margin-bottom: 20px;
     transform: translateX(30px);
-    transition: all 0.3s ease;
   }
   .empty {
     position: absolute;
