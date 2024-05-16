@@ -1,6 +1,12 @@
 import { schema } from '@moten/ui'
 import _pageSchema from './page-schema'
 
-export const blockSchema = schema
+export type BlockSchema = typeof schema
 
-export const pageSchema = _pageSchema
+export type BlockSchemaKeys = keyof BlockSchema
+
+export type PageSchema = typeof _pageSchema
+
+export const blockSchema = schema as BlockSchema
+
+export const pageSchema = _pageSchema as PageSchema

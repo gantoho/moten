@@ -59,7 +59,7 @@ const list = ref<ViewportListType[]>([
   },
 ])
 
-const callback = (value: any) => {
+const callback = (value: { desktop: boolean; mobile: boolean }) => {
   emit('callback', {
     data: {
       [parentKey]: {

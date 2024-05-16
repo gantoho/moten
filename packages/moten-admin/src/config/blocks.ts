@@ -1,4 +1,5 @@
 import icon from '@/config/icon'
+import { BlockSchema, BlockSchemaKeys } from './schema'
 
 const { row, column, image, video, text, swiper, blank, canvas } = icon
 
@@ -12,7 +13,7 @@ export interface BaseBlockType {
     desktop: BaseBlockType[][]
     mobile: BaseBlockType[][]
   }
-  formData: object
+  formData: BlockSchema[BlockSchemaKeys]
 }
 
 export const baseBlocks = [

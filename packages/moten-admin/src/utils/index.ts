@@ -1,4 +1,4 @@
-import { defineAsyncComponent, markRaw } from 'vue'
+import { Component, defineAsyncComponent, markRaw } from 'vue'
 import { customAlphabet } from 'nanoid'
 
 /**
@@ -17,7 +17,7 @@ export const nanoid = (length = 8) => {
  * @param importUrl 引入所有的组件 import.meta.glob('@/components/config/**')
  * @returns
  */
-export const batchDynamicComponents = (name: string, importUrl: any) => {
+export const batchDynamicComponents = (name: string, importUrl: Record<string, Component>) => {
   const components = importUrl
   const componentMap = Object.assign(
     {},

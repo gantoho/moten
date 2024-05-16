@@ -16,7 +16,7 @@
 import deepmerge from 'deepmerge'
 import { omit } from 'lodash'
 import { ref, watch } from 'vue'
-import { blockSchema } from '@/config/schema'
+import { type BlockSchemaKeys, blockSchema } from '@/config/schema'
 import { useEditStore } from '@/stores/edit'
 import { findNodeById } from './nested'
 import { Icon } from '@iconify/vue'
@@ -28,19 +28,19 @@ const list = ref<any[]>([])
 
 watch(
   () => edit.currentSelect,
-  (value: any) => {
-    const _blockSchema = blockSchema as any
-    const properties = _blockSchema?.[value?.code]?.properties as any
+  (value) => {
+    const code = value?.code as BlockSchemaKeys
+    const properties = blockSchema[code].properties
     if (!value || !properties) {
       list.value = []
       return
     }
 
-    list.value = Object.values(properties).map((item: any, index) => {
+    list.value = Object.values(properties).map((item, index) => {
       const parentKey = Object.keys(properties)[index]
       const { formData, id } = value
       const { groupName } = item.properties
-      const pickResult: object = omit(item.properties, ['groupName'])
+      const pickResult = omit(item.properties, ['groupName'])
       const listResult = Object.fromEntries(
         Object.entries(pickResult).map(([key, value]) => [
           key,
