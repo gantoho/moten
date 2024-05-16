@@ -16,6 +16,7 @@
         "@sinclair/typebox": "^0.32.15",
         "@vueup/vue-quill": "^1.2.0",
         "@vueuse/core": "^10.9.0",
+        "ajv": "^8.13.0",
         "autoprefixer": "^10.4.18",
         "axios": "^1.6.7",
         "dayjs": "^1.11.10",
