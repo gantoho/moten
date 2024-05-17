@@ -34,6 +34,16 @@ const router = createRouter({
       component: () => import('../pages/test/index.vue'),
     },
     {
+      path: '/test-easy',
+      name: 'test-easy',
+      component: () => import('../pages/test/index-easy.vue'),
+    },
+    {
+      path: '/test-iframe',
+      name: 'test-iframe',
+      component: () => import('../pages/test/index-iframe.vue'),
+    },
+    {
       path: '/test/form-validate',
       name: 'form-validate',
       component: () => import('../pages/test/form-validate.vue'),
