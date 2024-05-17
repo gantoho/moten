@@ -33,6 +33,11 @@ const router = createRouter({
       name: 'test',
       component: () => import('../pages/test/index.vue'),
     },
+    {
+      path: '/test/form-validate',
+      name: 'form-validate',
+      component: () => import('../pages/test/form-validate.vue'),
+    },
   ],
 })
 
