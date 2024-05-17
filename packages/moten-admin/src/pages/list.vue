@@ -15,12 +15,14 @@
 
 <script setup>
 import Ajv from 'ajv'
+import AjvErrors from 'ajv-errors'
 import { ref } from 'vue'
 
-const ajv = new Ajv()
+const ajv = new Ajv({ allErrors: true })
 ajv.addKeyword({
-  keyword: ['placeholder', 'rules'],
+  keyword: ['placeholder', 'rules', 'widget'],
 })
+AjvErrors(ajv)
 
 const ruleFormRef = ref()
 
@@ -29,16 +31,26 @@ const schema = ref({
   required: ['name', 'desc'],
   properties: {
     name: {
+      widget: 'config-input',
       type: 'string',
       title: '姓',
       default: '',
       placeholder: '请输入',
+      minLength: 3,
+      maxLength: 5,
+      pattern: '^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$',
+      errorMessage: {
+        minLength: '最少3个字符',
+        maxLength: '最多5个字符',
+        pattern: '没通过哈哈',
+      },
       rules: [
         { required: true, message: 'Please input Activity name', trigger: 'blur' },
         { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'change' },
       ],
     },
     desc: {
+      widget: 'config-input',
       type: 'string',
       title: '名',
       default: '',
@@ -63,7 +75,7 @@ const submitForm = async (formEl) => {
   const validate = ajv.compile(schema.value)
   const valid = validate(form.value)
   if (!valid) {
-    console.log(validate.errors)
+    console.warn('ajv', validate.errors[0].instancePath + validate.errors[0].message)
     return
   }
 
