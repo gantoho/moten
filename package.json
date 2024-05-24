@@ -19,8 +19,8 @@
         "ui:build": "pnpm -F @moten/ui build",
         "admin": "pnpm -F @moten/admin dev",
         "admin:build": "pnpm -F @moten/admin build",
-        "play:vue2": "node --loader ts-node/esm ./scripts/play.ts -- vue2",
-        "play:vue3": "node --loader ts-node/esm ./scripts/play.ts -- vue3",
+        "play:vue2": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue2 dev",
+        "play:vue3": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue3 dev",
         "sv": "pnpm --filter @moten/server run dev"
     },
     "license": "ISC",
