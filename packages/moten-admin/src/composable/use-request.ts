@@ -1,27 +1,27 @@
-import axios, { InternalAxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios'
+import axios from 'axios'
 
-const axiosInstance: AxiosInstance = axios.create({
+const axiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8081',
   timeout: 30000,
 })
 // 添加请求拦截器
 axiosInstance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  (config) => {
     // 在发送请求之前做些什么，比如添加token等
     return config
   },
-  (error: any) => {
+  (error) => {
     // 处理请求错误
     return Promise.reject(error)
   },
 )
 // 添加响应拦截器
 axiosInstance.interceptors.response.use(
-  (response: AxiosResponse) => {
+  (response) => {
     // 对响应数据做点什么，比如401错误等需要跳转到登录等
     return response
   },
-  (error: any) => {
+  (error) => {
     // 处理响应错误
     return Promise.reject(error)
   },
