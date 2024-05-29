@@ -1,23 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import moten from '@moten/ui'
+import { ref } from 'vue'
+const { MoImage } = moten
+
+const width = ref('')
+const changeWidth = () => {
+  width.value = '500px'
+}
+</script>
 
 <template>
-  <div>
-    <router-view></router-view>
-    <a href="https://baidu.com">这是红色，如果被组件库污染则为蓝色</a>
-    <router-link to="/about">Go to Home</router-link>
+  <div class="container" :style="{ width: width }">
     <mo-image
-      :data="{
-        content: {
-          src: {
-            desktop: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
-            mobile: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
-          },
-          link: {
-            desktop: '/about',
-            mobile: '/about',
-          },
-        },
-      }"
-    />
+      src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
+      @click="changeWidth"
+    ></mo-image>
   </div>
 </template>
+
+<style scoped>
+.container {
+  container-type: inline-size;
+  width: 100vw;
+}
+</style>

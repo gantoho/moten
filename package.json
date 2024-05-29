@@ -1,9 +1,9 @@
 {
     "name": "moten",
-    "private": true,
     "version": "1.0.0",
-    "description": "榫卯低代码平台. Mortise and tenon low code platform.",
+    "description": "",
     "type": "module",
+    "main": "index.js",
     "packageManager": "pnpm@7.9.5",
     "engines": {
         "pnpm": ">=7",
@@ -13,22 +13,25 @@
         "preinstall": "npx only-allow pnpm",
         "in": "pnpm i -r",
         "clear": "rimraf --glob ./node_modules ./packages/**/node_modules ./packages/**/dist",
-        "dev": "node --loader ts-node/esm ./scripts/dev.ts",
+        "dev": "pnpm -F @moten/editor dev",
         "ui": "pnpm -F @moten/ui dev",
-        "ui:test": "pnpm -F @moten/ui test",
         "ui:build": "pnpm -F @moten/ui build",
-        "admin": "pnpm -F @moten/admin dev",
-        "admin:build": "pnpm -F @moten/admin build",
-        "play:vue2": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue2 dev",
         "play:vue3": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue3 dev",
-        "sv": "pnpm --filter @moten/server run dev"
+        "play:vue2": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue2 dev",
+        "prepare": "husky",
+        "lint": "node ./scripts/lint.js"
     },
+    "config": {
+        "commitizen": {
+            "path": "cz-vinyl"
+        }
+    },
+    "lint-staged": {
+        "*.{js,ts,vue}": "pnpm lint"
+    },
+    "keywords": [],
+    "author": "",
     "license": "ISC",
-    "devDependencies": {
-        "rimraf": "^5.0.5",
-        "ts-node": "^10.9.2",
-        "zx": "^7.2.3"
-    },
     "pnpm": {
         "packageExtensions": {
             "vue-template-compiler": {
@@ -40,17 +43,16 @@
                 "peerDependencies": {
                     "vue": "^2.7.16"
                 }
-            },
-            "@vue/composition-api": {
-                "peerDependencies": {
-                    "vue": "~2.6.14"
-                }
-            },
-            "@vue/test-utils": {
-                "devDependencies": {
-                    "vue": "^3.4.21"
-                }
             }
         }
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^19.3.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "cz-vinyl": "^2.5.1",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.4",
+        "rimraf": "^5.0.7",
+        "zx": "^8.1.1"
     }
 }

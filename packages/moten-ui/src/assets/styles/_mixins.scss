@@ -1,4 +1,4 @@
-// Mobile端
+// mobile
 @mixin mb {
   @media (max-width: 1023.9px) {
     @content;
@@ -11,7 +11,7 @@
   }
 }
 
-// PC端
+// pc
 @mixin pc {
   @media (min-width: 1024px) {
     @content;
@@ -21,53 +21,10 @@
   }
 }
 
-// PC端超小屏
-@mixin xs {
-  @media (min-width: 1024px) and (max-width: 1179px) {
-    @content;
-  }
-  @container (min-width: 1024px)and (max-width: 1179px) {
-    @content;
-  }
-}
-
-// PC端小屏
-@mixin md {
-  @media (min-width: 1180px) and (max-width: 1365px) {
-    @content;
-  }
-  @container (min-width: 1180px)  and (max-width: 1365px) {
-    @content;
-  }
-}
-
-// PC端中屏
-@mixin lg {
-  @media (min-width: 1366px) and (max-width: 1659px) {
-    @content;
-  }
-  @container (min-width: 1366px)  and (max-width: 1659px) {
-    @content;
-  }
-}
-
-// PC端大屏
-@mixin xl {
-  @media (min-width: 1660px) {
-    @content;
-  }
-  @container (min-width: 1660px) {
-    @content;
-  }
-}
-
-// 响应式
 @mixin res($property, $mobile: null, $pc: null) {
+  $pcValue: if(unitless($pc), #{$pc}px, $pc);
   $mobileValue: if(unitless($mobile), vw($mobile), $mobile);
   $mobileContainerValue: if(unitless($mobile), #{$mobile}px, $mobile);
-  $pcValue: if(unitless($pc), #{$pc}px, $pc);
-
-  // 顺序很重要，pc和mobile，mobile必须在下面，@media 和 @container 的情况需要综合考虑
 
   @if (exists($pc)) {
     @include pc {
@@ -84,3 +41,7 @@
     }
   }
 }
+
+// @include res(font-size, 12, 20);
+// @include res(width, 12, 20);
+// @include res(height, 12, 20);
