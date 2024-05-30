@@ -13,7 +13,7 @@
         "preinstall": "npx only-allow pnpm",
         "in": "pnpm i -r",
         "dev": "pnpm -F @moten/editor dev",
-        "build": "pnpm ui:build && pnpm -F @moten/editor build",
+        "build": "pnpm ui:build && pnpm -F @moten/editor build-only",
         "clear": "rimraf --glob ./node_modules ./packages/**/node_modules ./packages/**/dist",
         "ui": "pnpm -F @moten/ui dev",
         "ui:build": "pnpm -F @moten/ui build",
