@@ -12,8 +12,9 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "in": "pnpm i -r",
-        "clear": "rimraf --glob ./node_modules ./packages/**/node_modules ./packages/**/dist",
         "dev": "pnpm -F @moten/editor dev",
+        "build": "pnpm ui:build && pnpm -F @moten/editor build",
+        "clear": "rimraf --glob ./node_modules ./packages/**/node_modules ./packages/**/dist",
         "ui": "pnpm -F @moten/ui dev",
         "ui:build": "pnpm -F @moten/ui build",
         "play:vue3": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue3 dev",
