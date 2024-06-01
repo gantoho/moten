@@ -69,6 +69,7 @@ defineProps({
       font-size: 14px;
       line-height: 14px;
       padding-top: 4px;
+      white-space: nowrap;
     }
   }
 }

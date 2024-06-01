@@ -1,69 +1,38 @@
-import type { BlockSchema, BlockSchemaKeys } from './schema'
-
-export interface BaseBlock {
-  /**
-   * id 区分组件
-   */
-  id: string
-  /**
-   * 组件名
-   */
-  code: string
-  /**
-   * 物料区标题
-   */
-  name: string
-  /**
-   * 物料区图标
-   */
-  icon: string
-  /**
-   * 是否是嵌套组件
-   */
-  nested?: boolean
-  /**
-   * 嵌套子项
-   */
-  children?: BaseBlock[][]
-  /**
-   * 配置内容
-   */
-  formData: BlockSchema[BlockSchemaKeys] | Object
-}
+import type { BaseBlock } from '@/types/edit'
 
 export const baseBlocks: BaseBlock[] = [
   {
     id: '',
     name: '图片',
-    code: 'image',
+    code: 'mo-image',
     icon: 'image',
     formData: {},
   },
   {
     id: '',
     name: '视频',
-    code: 'video',
+    code: 'mo-video',
     icon: 'video',
     formData: {},
   },
   {
     id: '',
     name: '文本',
-    code: 'text',
+    code: 'mo-text',
     icon: 'text',
     formData: {},
   },
   {
     id: '',
     name: '幻灯片',
-    code: 'swiper',
+    code: 'mo-swiper',
     icon: 'swiper',
     formData: {},
   },
   {
     id: '',
     name: '留白',
-    code: 'blank',
+    code: 'mo-blank',
     icon: 'blank',
     formData: {},
   },
@@ -73,7 +42,7 @@ export const seniorBlocks: BaseBlock[] = [
   {
     id: '',
     name: '多行',
-    code: 'row',
+    code: 'mo-row',
     icon: 'row',
     nested: true,
     children: [[], []],
@@ -82,7 +51,7 @@ export const seniorBlocks: BaseBlock[] = [
   {
     id: '',
     name: '多列',
-    code: 'column',
+    code: 'mo-column',
     icon: 'column',
     nested: true,
     children: [[], []],
@@ -91,7 +60,7 @@ export const seniorBlocks: BaseBlock[] = [
   {
     id: '',
     name: '画布',
-    code: 'canvas',
+    code: 'mo-canvas',
     icon: 'canvas',
     nested: true,
     children: [[], []],
@@ -103,14 +72,14 @@ export const canvasBlocks: BaseBlock[] = [
   {
     id: '',
     name: '图片',
-    code: 'image',
+    code: 'mo-image',
     icon: 'image',
     formData: {},
   },
   {
     id: '',
     name: '文本',
-    code: 'text',
+    code: 'mo-text',
     icon: 'text',
     formData: {},
   },

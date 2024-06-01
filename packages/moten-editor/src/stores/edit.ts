@@ -1,15 +1,20 @@
+import type { BaseBlockNull, Viewport } from '@/types/edit'
 import { defineStore } from 'pinia'
 
 export const useEditStore = defineStore('edit', {
   state: () => ({
-    count: 0,
+    currentSelect: null as BaseBlockNull,
+    viewport: 'desktop' as Viewport,
   }),
   getters: {
-    double: (state) => state.count * 2,
+    // double: (state) => state.count * 2,
   },
   actions: {
-    setCount() {
-      this.count++
+    setCurrentSelect(value: BaseBlockNull) {
+      this.currentSelect = value
+    },
+    setViewport(value: Viewport) {
+      this.viewport = value
     },
   },
 })
