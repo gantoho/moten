@@ -3,12 +3,18 @@ import vue from '@vitejs/plugin-vue'
 import { createVuePlugin } from 'vite-plugin-vue2'
 import { resolve } from 'path'
 import { isVue2 } from 'vue-demi'
+import dts from 'vite-plugin-dts'
 
 const name = isVue2 ? 'vue2' : 'vue3'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [isVue2 ? createVuePlugin() : vue()],
+  plugins: [isVue2 ? createVuePlugin() : vue(), dts()],
+  resolve: {
+    alias: {
+      '@': resolve('./src'),
+    },
+  },
   build: {
     outDir: `dist/${name}`,
     lib: {

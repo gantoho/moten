@@ -12,7 +12,7 @@
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     },
     "dependencies": {
-        "@moten/ui": "workspace:^0.0.0",
+        "@moten/ui": "workspace:~",
         "pinia": "^2.1.7",
         "vue": "^3.4.21",
         "vue-router": "^4.3.0"

@@ -8,6 +8,7 @@ import './assets/styles/main.scss'
 
 import { Icon } from '@iconify/vue'
 import ElementPlus from 'element-plus'
+import Draggable from 'vuedraggable'
 
 const app = createApp(App)
 
@@ -16,5 +17,6 @@ app.use(createPinia())
 app.use(router)
 
 app.component('Icon', Icon)
+app.component('draggable', Draggable)
 
 app.mount('#app')
