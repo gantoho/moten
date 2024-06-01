@@ -36,4 +36,12 @@ export default defineConfig({
       },
     },
   },
+  css: {
+    preprocessorOptions: {
+      // 配置 mixin.scss 混合文件的全局引入
+      scss: {
+        additionalData: `@import "@/assets/styles/resources.scss";`,
+      },
+    },
+  },
 })

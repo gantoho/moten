@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 
 import './assets/styles/main.scss'
+import '@moten/ui/style'
 
 import { Icon } from '@iconify/vue'
 import ElementPlus from 'element-plus'
