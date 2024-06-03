@@ -35,7 +35,7 @@
         "switch:vue2": "vue-demi-switch 2 vue2",
         "clear": "rimraf dist ./node_modules",
         "clear:dist": "rimraf dist",
-        "test": "pnpm switch:vue3 && vitest",
+        "test": "pnpm switch:vue3 && vitest --run",
         "coverage": "pnpm switch:vue3 && vitest run --coverage"
     },
     "dependencies": {
@@ -46,10 +46,11 @@
     },
     "devDependencies": {
         "@sinclair/typebox": "^0.32.31",
-        "@vue/composition-api": "^1.7.2",
         "@types/node": "^20.12.12",
         "@vitejs/plugin-vue": "^5.0.4",
         "@vue/compiler-sfc": "^3.4.27",
+        "@vue/composition-api": "^1.7.2",
+        "@vue/test-utils": "^2.4.6",
         "autoprefixer": "^10.4.19",
         "postcss": "^8.4.38",
         "rimraf": "^5.0.7",

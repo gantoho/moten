@@ -15,7 +15,7 @@
         "dev": "node ./scripts/dev.js",
         "editor": "pnpm -F @moten/editor dev",
         "build": "pnpm ui:build && pnpm -F @moten/editor build-only",
-        "clear": "rimraf --glob ./node_modules ./packages/**/node_modules ./packages/**/dist",
+        "clear": "rimraf --glob pnpm-lock.yaml ./node_modules ./packages/**/node_modules ./packages/**/dist",
         "ui": "pnpm -F @moten/ui dev",
         "ui:build": "pnpm -F @moten/ui build",
         "play:vue3": "pnpm -F @moten/ui build && pnpm -F @moten/playground-vue3 dev",
@@ -44,6 +44,11 @@
             "vue-template-compiler@2.7.16": {
                 "peerDependencies": {
                     "vue": "^2.7.16"
+                }
+            },
+            "@vue/test-utils": {
+                "devDependencies": {
+                    "vue": "^3.4.21"
                 }
             }
         }
