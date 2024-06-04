@@ -46,5 +46,11 @@ export default defineConfig({
       },
     },
   },
-  test: {},
+  test: {
+    environment: 'jsdom',
+    coverage: {
+      include: ['src/components/**/*'],
+      exclude: ['src/**/schema.ts'],
+    },
+  },
 })
