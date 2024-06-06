@@ -20,10 +20,8 @@ export default defineComponent({
     const { data, viewport, children } = toRefs(props)
 
     const classes = computed(() => [n()])
-    const itemComputed = computed(
-      () => (index: number) => children.value?.[viewport.value]?.[index] || [],
-    )
-    const cols = computed(() => data.value?.cols?.[viewport.value] || '')
+    const itemComputed = computed(() => (index: number) => children.value?.[index] || [])
+    const cols = computed(() => data.value?.cols?.[viewport.value] || [0.5, 0.5])
     const background = computed(() => data.value?.background?.[viewport.value] || '')
     const styles = computed(() => ({ background: background.value }))
     const itemStyle = computed(() => (item: number | string) => ({

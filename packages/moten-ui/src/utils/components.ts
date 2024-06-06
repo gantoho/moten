@@ -1,5 +1,5 @@
 import { TSchema, Type } from '@sinclair/typebox'
-import { App, Component, Plugin } from 'vue-demi'
+import { App } from 'vue-demi'
 
 /**
  * schema加上视口
@@ -18,8 +18,8 @@ export const schemaAllViewport = <T extends TSchema>(params: T) => {
  * @param component
  * @returns
  */
-export function withInstall(component: Component) {
-  ;(component as Component & Plugin).install = function (app: App) {
+export function withInstall(component: any) {
+  component.install = function (app: App) {
     const { name } = component
     if (name) app.component(name, component)
   }

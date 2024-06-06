@@ -8,10 +8,37 @@
     ghost-class="ghost-class"
     class="edit-render-drag"
     :move="move"
+    @click="console.log(list)"
   >
     <template #item="{ element }">
       <div class="element">
         <div
+          v-if="element.nested && level < 2"
+          class="block-nested-render"
+          :class="activeClass(element)"
+          @click.stop="edit.setCurrentSelect(element)"
+        >
+          <component
+            :is="renderComponentCode(element)"
+            :key="element.id"
+            :data="element.formData"
+            :viewport="edit.viewport"
+            :children="element.children"
+          >
+            <template #default="{ item, index }">
+              <edit-render-drag
+                :key="element.id + '-' + index"
+                :list="item"
+                :level="level + 1"
+                :group="group"
+                class="nested-item"
+                :class="nestedClass"
+              ></edit-render-drag>
+            </template>
+          </component>
+        </div>
+        <div
+          v-else
           class="block-render"
           :class="activeClass(element)"
           @click.stop="edit.setCurrentSelect(element)"
