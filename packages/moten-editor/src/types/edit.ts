@@ -1,4 +1,4 @@
-import type { BlockSchemaFormData } from '@/config/schema'
+import type { BlockSchemaFormData, PageSchemaFormData } from '@/config/schema'
 
 export type Viewport = 'mobile' | 'desktop'
 
