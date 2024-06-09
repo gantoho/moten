@@ -3,11 +3,12 @@ import { defineStore } from 'pinia'
 
 export const useEditStore = defineStore('edit', {
   state: () => ({
-    currentSelect: null as BaseBlockNull,
+    currentSelect: {} as BaseBlockNull,
     viewport: 'desktop' as Viewport,
+    configPanelShow: false,
   }),
   getters: {
-    // double: (state) => state.count * 2,
+    isMobileViewport: (state) => state.viewport === 'mobile',
   },
   actions: {
     setCurrentSelect(value: BaseBlockNull) {
@@ -15,6 +16,9 @@ export const useEditStore = defineStore('edit', {
     },
     setViewport(value: Viewport) {
       this.viewport = value
+    },
+    setConfigPanelShow(value: boolean) {
+      this.configPanelShow = value
     },
   },
 })

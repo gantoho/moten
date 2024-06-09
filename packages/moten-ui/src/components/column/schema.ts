@@ -20,6 +20,6 @@ const schema = Type.Object({
   cols: schemaAllViewport(cols),
 })
 
-export type MoImageSchema = Static<typeof schema>
+export type MoColumnSchema = Static<typeof schema>
 
 export default schema

@@ -58,6 +58,7 @@
 import { computed } from 'vue'
 import { useEditStore } from '@/stores/edit'
 import { nestedClass, move } from './nested'
+import { COMPONENT_PREFIX } from '@/config'
 
 const edit = useEditStore()
 
@@ -87,7 +88,7 @@ defineProps({
 
 const renderComponentCode = computed(() => {
   return (element: { code: string }) => {
-    return element.code
+    return COMPONENT_PREFIX + '-' + element.code
   }
 })
 const activeClass = computed(() => {
