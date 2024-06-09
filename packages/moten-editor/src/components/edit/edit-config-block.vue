@@ -13,12 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import deepmerge from 'deepmerge'
 import { useEditStore } from '@/stores/edit'
 import { ref, watch } from 'vue'
 import { blockSchema, type BlockSchemaKeys } from '@/config/schema'
 import type { BaseBlock } from '@/types/edit'
 import { findNodeById } from './nested'
+import deepmerge from 'deepmerge'
 
 const edit = useEditStore()
 
@@ -56,7 +56,14 @@ const callback = (params: { data: object; id: string }) => {
   if (!id) return
   const blockConfig = edit.blockConfig || []
   const newBlockConfig = findNodeById(blockConfig, id, data)
+
   edit.setBlockConfig(newBlockConfig)
+
+  if (edit.currentSelect.id === id) {
+    const currentSelect = edit.currentSelect
+    currentSelect.formData = deepmerge.all([edit.currentSelect.formData || {}, data])
+    edit.setCurrentSelect(currentSelect)
+  }
 }
 </script>
 
