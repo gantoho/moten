@@ -43,7 +43,7 @@ const pageStyle = computed(() => {
   return {}
 })
 const pageClass = computed(() => {
-  return {}
+  return { 'is-mobile': edit.isMobileViewport }
 })
 </script>
 

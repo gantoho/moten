@@ -28,21 +28,12 @@ const edit = useEditStore()
 watch(
   () => edit.currentSelect,
   (value) => {
-    if (value) {
+    if (value.id) {
       edit.setConfigPanelShow(true)
     }
   },
   {
     deep: true,
-  },
-)
-
-watch(
-  () => edit.isMobileViewport,
-  (value) => {
-    if (value) {
-      edit.setConfigPanelShow(true)
-    }
   },
 )
 

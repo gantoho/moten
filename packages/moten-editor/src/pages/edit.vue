@@ -1,7 +1,7 @@
 <template>
   <div class="edit">
     <edit-header />
-    <div class="container">
+    <div class="container" :class="classes">
       <edit-block />
       <edit-render />
       <edit-config />
@@ -9,7 +9,16 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useEditStore } from '@/stores/edit'
+
+const edit = useEditStore()
+
+const classes = computed(() => {
+  return { 'mobile-background': edit.isMobileViewport }
+})
+</script>
 
 <style scoped lang="scss">
 .edit {
