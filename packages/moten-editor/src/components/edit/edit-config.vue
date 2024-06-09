@@ -10,9 +10,9 @@
 
     <div class="content">
       <transition-group name="fade">
-        <div class="title" v-if="edit.currentSelect">组件</div>
+        <div class="title" v-if="edit.currentSelect.id">组件</div>
         <div class="title" v-else>页面</div>
-        <edit-config-block v-if="edit.currentSelect" />
+        <edit-config-block v-if="edit.currentSelect.id" />
         <edit-config-page v-else />
       </transition-group>
     </div>
@@ -32,6 +32,9 @@ watch(
       edit.setConfigPanelShow(true)
     }
   },
+  {
+    deep: true,
+  },
 )
 
 watch(
@@ -46,7 +49,7 @@ watch(
 watch(
   () => edit.configPanelShow,
   (value) => {
-    if (!value) edit.setCurrentSelect(null)
+    if (!value) edit.setCurrentSelect({})
   },
 )
 

@@ -1,7 +1,7 @@
 <template>
   <div class="edit-config-block">
     <edit-config-render :list="list" @callback="callback">
-      <div v-if="!edit.currentSelect">
+      <div v-if="!edit.currentSelect.id">
         <el-empty description="请在左侧拖入组件后，点击选中组件">
           <template #image>
             <v-icon icon="dragBlank" class="icon" />
@@ -13,13 +13,16 @@
 </template>
 
 <script setup lang="ts">
+import deepmerge from 'deepmerge'
 import { useEditStore } from '@/stores/edit'
 import { ref, watch } from 'vue'
-import { type BlockSchemaKeys, blockSchema } from '@/config/schema'
+import { blockSchema, type BlockSchemaKeys } from '@/config/schema'
+import type { BaseBlock } from '@/types/edit'
+import { findNodeById } from './nested'
 
 const edit = useEditStore()
 
-const list = ref<any[]>([])
+const list = ref<BaseBlock[]>([])
 
 watch(
   () => edit.currentSelect,
@@ -31,22 +34,30 @@ watch(
       return
     }
 
-    list.value = Object.values(properties).map((item, index) => {
-      const { formData, id } = value
-      console.warn(Object.entries(item.properties))
-      Object.entries(item.properties).map(([key, value]) => {
-        return [key, { ...value, id, key, formData: formData[key] || {} }]
-      })
+    const { formData, id } = value as any
 
-      return {}
-    })
+    const listResult = Object.fromEntries(
+      Object.entries(properties).map((itemChild) => {
+        const [key, value] = itemChild as any
+        return [key, { ...value, id, key, formData: formData?.[key] || {} }]
+      }),
+    )
+
+    list.value = [...Object.values(listResult)] as BaseBlock[]
   },
   {
     immediate: true,
+    deep: true,
   },
 )
 
-const callback = (params: any) => {}
+const callback = (params: { data: object; id: string }) => {
+  const { data, id } = params
+  if (!id) return
+  const blockConfig = edit.blockConfig || []
+  const newBlockConfig = findNodeById(blockConfig, id, data)
+  edit.setBlockConfig(newBlockConfig)
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,4 +1,4 @@
-import type { BlockSchema, BlockSchemaKeys } from '@/config/schema'
+import type { BlockSchemaFormData } from '@/config/schema'
 
 export type Viewport = 'mobile' | 'desktop'
 
@@ -6,19 +6,19 @@ export interface BaseBlock {
   /**
    * id 区分组件
    */
-  id: string
+  id?: string
   /**
    * 组件名
    */
-  code: string
+  code?: string
   /**
    * 物料区标题
    */
-  name: string
+  name?: string
   /**
    * 物料区图标
    */
-  icon: string
+  icon?: string
   /**
    * 是否是嵌套组件
    */
@@ -30,7 +30,5 @@ export interface BaseBlock {
   /**
    * 配置内容
    */
-  formData: BlockSchema[BlockSchemaKeys] | Object
+  formData?: Partial<BlockSchemaFormData[keyof BlockSchemaFormData]>
 }
-
-export type BaseBlockNull = BaseBlock | null

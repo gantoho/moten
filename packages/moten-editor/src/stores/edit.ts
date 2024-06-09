@@ -1,9 +1,10 @@
-import type { BaseBlockNull, Viewport } from '@/types/edit'
+import type { BaseBlock, Viewport } from '@/types/edit'
 import { defineStore } from 'pinia'
 
 export const useEditStore = defineStore('edit', {
   state: () => ({
-    currentSelect: {} as BaseBlockNull,
+    currentSelect: {} as BaseBlock,
+    blockConfig: [] as BaseBlock[],
     viewport: 'desktop' as Viewport,
     configPanelShow: false,
   }),
@@ -11,8 +12,11 @@ export const useEditStore = defineStore('edit', {
     isMobileViewport: (state) => state.viewport === 'mobile',
   },
   actions: {
-    setCurrentSelect(value: BaseBlockNull) {
+    setCurrentSelect(value: BaseBlock) {
       this.currentSelect = value
+    },
+    setBlockConfig(value: BaseBlock[]) {
+      this.blockConfig = value
     },
     setViewport(value: Viewport) {
       this.viewport = value

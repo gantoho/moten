@@ -11,13 +11,33 @@
 
 <script setup lang="ts">
 import type { BaseBlock } from '@/types/edit'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useEditStore } from '@/stores/edit'
 import { dragGroup } from './nested'
 
 const edit = useEditStore()
 
 const list = ref<BaseBlock[]>([])
+
+watch(
+  () => list.value,
+  (val) => {
+    edit.setBlockConfig(val)
+  },
+  {
+    deep: true,
+  },
+)
+
+watch(
+  () => edit.blockConfig,
+  (val) => {
+    list.value = val
+  },
+  {
+    deep: true,
+  },
+)
 
 const pageStyle = computed(() => {
   return {}
