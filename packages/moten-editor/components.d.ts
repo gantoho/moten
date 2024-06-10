@@ -7,9 +7,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ConfigBaseTab: typeof import('./src/components/config/base/config-base-tab.vue')['default']
     ConfigColumn: typeof import('./src/components/config/config-column.vue')['default']
     ConfigFiles: typeof import('./src/components/config/config-files.vue')['default']
     ConfigInput: typeof import('./src/components/config/config-input.vue')['default']
+    ConfigViewport: typeof import('./src/components/config/config-viewport.vue')['default']
     copy: typeof import('./src/components/edit/edit-config-block copy.vue')['default']
     EditBlock: typeof import('./src/components/edit/edit-block.vue')['default']
     EditBlockDrag: typeof import('./src/components/edit/edit-block-drag.vue')['default']

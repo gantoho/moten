@@ -35,6 +35,7 @@ const edit = useEditStore()
 watch(viewport, (val) => {
   edit.setViewport(val)
   edit.setConfigPanelShow(val === 'mobile')
+  edit.setCurrentSelect({})
 })
 </script>
 

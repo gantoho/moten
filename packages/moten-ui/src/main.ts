@@ -21,11 +21,17 @@ export type MoComponentSchema = {
 }
 
 const components = [MoImage, MoColumn]
-const install = (app: App) => {
+const install = (
+  app: App,
+  options: {
+    platform: 'editor' | 'user'
+  },
+) => {
   components.forEach((component) => {
     const { name } = component
     if (name) app.component(name, component)
   })
+  app.provide('platform', options.platform)
 }
 export default { install, MoImage, MoColumn }
 

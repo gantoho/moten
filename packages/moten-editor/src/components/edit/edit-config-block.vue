@@ -59,29 +59,6 @@ const callback = (params: { data: object; id: string }) => {
   const newBlockConfig = findNodeById(blockConfig, id, data)
 
   edit.setBlockConfig(newBlockConfig)
-
-  if (edit.currentSelect.id === id) {
-    const currentSelect = cloneDeep(edit.currentSelect) as any
-    const overwriteMerge = (_destinationArray: any, sourceArray: any, _options: any) => sourceArray
-    currentSelect.formData = deepmerge((edit.currentSelect.formData || {}) as any, data, {
-      arrayMerge: overwriteMerge,
-    })
-
-    if (edit.currentSelect.nested && edit.currentSelect.code === 'column') {
-      const cols = currentSelect.formData?.cols?.desktop || [0.5, 0.5]
-      const oldCols = currentSelect.children || [[], []]
-      if (oldCols.length > cols.length) {
-        const count = oldCols.length - cols.length
-        currentSelect.children?.splice(oldCols.length - count, count)
-      } else {
-        const count = cols.length - oldCols.length
-        const diff = Array.from({ length: count }, (_) => [])
-        currentSelect.children?.push(...diff)
-      }
-    }
-
-    edit.setCurrentSelect(currentSelect)
-  }
 }
 </script>
 
