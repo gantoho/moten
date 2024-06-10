@@ -13,6 +13,11 @@ const router = createRouter({
       name: 'edit',
       component: () => import('../pages/edit.vue'),
     },
+    {
+      path: '/form-validate',
+      name: 'form-validate',
+      component: () => import('../pages/test/form-validate.vue'),
+    },
   ],
 })
 
