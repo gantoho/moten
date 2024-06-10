@@ -56,7 +56,26 @@ const callback = (params: { data: object; id: string }) => {
   const { data, id } = params
   if (!id) return
   const blockConfig = edit.blockConfig || []
-  const newBlockConfig = findNodeById(blockConfig, id, data)
+  const newBlockConfig = findNodeById(blockConfig, id, (params: any) => {
+    let { array, index, node } = params
+    const overwriteMerge = (_destinationArray: any, sourceArray: any, _options: any) => sourceArray
+    array[index].formData = deepmerge(node.formData, data, {
+      arrayMerge: overwriteMerge,
+    })
+
+    if (node.nested && node.code === 'column') {
+      const cols = node.formData?.cols?.desktop || [0.5, 0.5]
+      const oldCols = node.children || [[], []]
+      if (oldCols.length > cols.length) {
+        const count = oldCols.length - cols.length
+        array[index].children?.splice(oldCols.length - count, count)
+      } else {
+        const count = cols.length - oldCols.length
+        const diff = Array.from({ length: count }, (_) => [])
+        array[index].children?.push(...diff)
+      }
+    }
+  })
 
   edit.setBlockConfig(newBlockConfig)
 }
