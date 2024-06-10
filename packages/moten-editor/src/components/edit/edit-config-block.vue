@@ -19,6 +19,7 @@ import { blockSchema, type BlockSchemaKeys } from '@/config/schema'
 import type { BaseBlock } from '@/types/edit'
 import { findNodeById } from './nested'
 import deepmerge from 'deepmerge'
+import { cloneDeep } from 'lodash'
 
 const edit = useEditStore()
 
@@ -26,15 +27,15 @@ const list = ref<BaseBlock[]>([])
 
 watch(
   () => edit.currentSelect,
-  (value) => {
-    const code = value?.code as BlockSchemaKeys
+  () => {
+    const code = edit.currentSelect?.code as BlockSchemaKeys
     const properties = blockSchema[code].properties
-    if (!value || !properties) {
+    if (!edit.currentSelect || !properties) {
       list.value = []
       return
     }
 
-    const { formData, id } = value as any
+    const { formData, id } = edit.currentSelect as any
 
     const listResult = Object.fromEntries(
       Object.entries(properties).map((itemChild) => {
@@ -60,8 +61,25 @@ const callback = (params: { data: object; id: string }) => {
   edit.setBlockConfig(newBlockConfig)
 
   if (edit.currentSelect.id === id) {
-    const currentSelect = edit.currentSelect
-    currentSelect.formData = deepmerge.all([edit.currentSelect.formData || {}, data])
+    const currentSelect = cloneDeep(edit.currentSelect) as any
+    const overwriteMerge = (_destinationArray: any, sourceArray: any, _options: any) => sourceArray
+    currentSelect.formData = deepmerge((edit.currentSelect.formData || {}) as any, data, {
+      arrayMerge: overwriteMerge,
+    })
+
+    if (edit.currentSelect.nested && edit.currentSelect.code === 'column') {
+      const cols = currentSelect.formData?.cols?.desktop || [0.5, 0.5]
+      const oldCols = currentSelect.children || [[], []]
+      if (oldCols.length > cols.length) {
+        const count = oldCols.length - cols.length
+        currentSelect.children?.splice(oldCols.length - count, count)
+      } else {
+        const count = cols.length - oldCols.length
+        const diff = Array.from({ length: count }, (_) => [])
+        currentSelect.children?.push(...diff)
+      }
+    }
+
     edit.setCurrentSelect(currentSelect)
   }
 }
