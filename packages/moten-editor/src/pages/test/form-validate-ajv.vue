@@ -20,6 +20,9 @@ import AjvErrors from 'ajv-errors'
 import { ref } from 'vue'
 
 const ajv = new Ajv({ allErrors: true })
+ajv.addKeyword({
+  keyword: ['placeholder', 'code'],
+})
 AjvErrors(ajv)
 
 const form = ref({
@@ -38,9 +41,11 @@ const schema = {
       required: ['desktop'],
       properties: {
         desktop: {
+          code: 'config-input',
           type: 'string',
           title: '姓名',
           default: '',
+          placeholder: '请输入',
           minLength: 1,
           maxLength: 5,
           //   pattern: '^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$',
@@ -54,14 +59,10 @@ const schema = {
       },
     },
     desc: {
+      code: 'config-input',
       type: 'string',
-      title: '描述',
+      title: '名',
       default: '',
-      minLength: 1,
-      errorMessage: {
-        required: '最少1个字符',
-        minLength: '最少1个字符',
-      },
     },
   },
 }
@@ -70,7 +71,7 @@ const ajvSubmitForm = () => {
   const validate = ajv.compile(schema)
   const valid = validate(form.value)
   if (!valid) {
-    console.warn('ajv error: ', validate.errors[0].instancePath, validate.errors[0].message)
+    console.warn('ajv error: ', validate.errors)
     return
   }
   console.warn('ajv submit!')
