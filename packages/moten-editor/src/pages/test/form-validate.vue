@@ -10,7 +10,7 @@
       <el-input v-model="form.name.desktop" />
     </el-form-item> -->
 
-    <el-form-item label="Activity name" prop="name.desktop">
+    <el-form-item label="姓名" prop="name.desktop">
       <element-custom-input v-model="form.name.desktop" />
     </el-form-item>
 
@@ -47,7 +47,7 @@ const schema = ref({
   properties: {
     name: {
       type: 'object',
-      required: ['desktop', 'mobile'],
+      required: ['desktop'],
       properties: {
         desktop: {
           code: 'config-input',
@@ -69,30 +69,10 @@ const schema = ref({
             { max: 5, message: '最多5个字符', trigger: 'change' },
           ],
         },
-        mobile: {
-          code: 'config-input',
-          type: 'string',
-          title: '姓名',
-          default: '',
-          placeholder: '请输入',
-          minLength: 1,
-          maxLength: 5,
-          //   pattern: '^(\\([0-9]{3}\\))?[0-9]{3}-[0-9]{4}$',
-          errorMessage: {
-            required: '最少1个字符',
-            minLength: '最少1个字符',
-            maxLength: '最多5个字符',
-            pattern: '自定义没通过哈哈',
-          },
-          rules: [
-            { required: true, min: 1, message: '最少1个字符', trigger: 'blur' },
-            { max: 5, message: '最多5个字符', trigger: 'change' },
-          ],
-        },
       },
     },
     desc: {
-      widget: 'config-input',
+      code: 'config-input',
       type: 'string',
       title: '名',
       default: '',
