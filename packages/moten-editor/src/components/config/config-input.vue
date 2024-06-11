@@ -1,6 +1,6 @@
 <template>
   <div class="config-input">
-    <el-form-item :label="title">
+    <el-form-item :label="title" :prop="key + '.' + viewport">
       <el-input v-model="input" :placeholder="placeholder" class="input" />
     </el-form-item>
   </div>
@@ -20,7 +20,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['callback'])
+const emit = defineEmits(['callback', 'update'])
 
 const { data } = toRefs(props)
 const { formData, key, id } = data.value
@@ -50,6 +50,9 @@ watch(
         [key]: data,
       },
       id,
+    })
+    emit('update', {
+      [key]: data,
     })
   },
   {

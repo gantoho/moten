@@ -1,6 +1,6 @@
 <template>
   <div class="config-viewport">
-    <el-form-item :label="title">
+    <el-form-item :label="title" :prop="key + '.' + viewport">
       <config-base-tab :data="list" @change="change">
         <template #default="{ item }">
           <v-icon-tooltip :icon="item.icon" :content="item.content" class="icon" />
@@ -24,7 +24,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['callback'])
+const emit = defineEmits(['callback', 'update'])
 
 const { data } = toRefs(props)
 const { formData, key, id } = data.value
@@ -64,6 +64,9 @@ const callback = (value: { desktop: boolean; mobile: boolean }) => {
       [key]: value,
     },
     id,
+  })
+  emit('update', {
+    [key]: value,
   })
 }
 const change = (value: ViewportList['value']) => {

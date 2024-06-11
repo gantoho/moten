@@ -1,6 +1,6 @@
 <template>
   <div class="edit-config-page">
-    <edit-config-render :list="list" @callback="callback"></edit-config-render>
+    <edit-config-render :list="list" :schema="schema" @callback="callback"></edit-config-render>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ const edit = useEditStore()
 
 const properties = pageSchema.properties
 const list = ref<(typeof properties)[keyof typeof properties][]>([])
+const schema = ref(pageSchema)
 const listResult = Object.fromEntries(
   Object.entries(properties).map((itemChild) => {
     const [key, value] = itemChild as [keyof typeof edit.pageConfig, (typeof itemChild)[1]]

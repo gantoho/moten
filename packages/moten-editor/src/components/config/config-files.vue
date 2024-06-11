@@ -1,16 +1,19 @@
 <template>
   <div class="config-files">
-    <el-form-item :label="title">
+    <el-form-item :label="title" :prop="key + '.' + viewport">
       <img v-if="src" :src="src" class="image" @click="fileClick" />
       <div v-else class="file" @click="fileClick">
         <v-icon icon="upload" class="icon" />
       </div>
+      <el-input v-model="src" style="display: none" />
     </el-form-item>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, toRefs, watch } from 'vue'
+import { useFormItem } from 'element-plus'
+const { formItem } = useFormItem()
 
 const props = defineProps({
   data: {
@@ -23,7 +26,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['callback'])
+const emit = defineEmits(['callback', 'update'])
 
 const { data } = toRefs(props)
 const { formData, key, id } = data.value
@@ -43,6 +46,8 @@ watch(
 watch(
   src,
   (value) => {
+    // formItem?.validate('change').catch((err: any) => console.warn(err))
+
     let data = {}
     const _value = value || ''
     if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
@@ -53,6 +58,9 @@ watch(
         [key]: data,
       },
       id,
+    })
+    emit('update', {
+      [key]: data,
     })
   },
   {
@@ -78,13 +86,19 @@ const fileClick = () => {
   .image {
     width: 80px;
     height: 80px;
-    border: 1px dashed var(--color-border);
+    box-shadow: 0 0 0 1px var(--color-border) inset;
     border-radius: var(--border-radius);
     background: var(--color-config-block-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+  }
+  .is-error {
+    .file,
+    .image {
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+    }
   }
   .image {
     border: 0;

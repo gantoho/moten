@@ -15,7 +15,7 @@
         <v-icon icon="preview" />
         预览
       </el-button>
-      <el-button type="primary">
+      <el-button type="primary" @click="submit">
         <v-icon icon="publish" />
         发布
       </el-button>
@@ -26,7 +26,17 @@
 <script setup lang="ts">
 import { useEditStore } from '@/stores/edit'
 import { type Viewport } from '@/types/edit'
-import { ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
+import Ajv from 'ajv'
+import AjvErrors from 'ajv-errors'
+import { blockSchema, type BlockSchemaKeys } from '@/config/schema'
+import { findNodeById } from './nested'
+
+const ajv = new Ajv({ allErrors: true })
+ajv.addKeyword({
+  keyword: ['placeholder', 'rules', 'code'],
+})
+AjvErrors(ajv)
 
 const viewport = ref<Viewport>('desktop')
 
@@ -37,6 +47,45 @@ watch(viewport, (val) => {
   edit.setConfigPanelShow(val === 'mobile')
   edit.setCurrentSelect({})
 })
+
+const validateAll = async (item: any) => {
+  const { value, schema, id } = item
+  const validate = ajv.compile(schema)
+  const valid = validate(value)
+  if (!valid) {
+    const path = validate.errors?.[0]?.instancePath
+    if (path) {
+      const [, , pathViewport] = path.split('/')
+
+      viewport.value = pathViewport as Viewport
+
+      await nextTick()
+
+      edit.setViewport(pathViewport as Viewport)
+      edit.setConfigPanelShow(true)
+      findNodeById(edit.blockConfig, id, (params) => {
+        const { node } = params
+        edit.setCurrentSelect(node)
+      })
+    }
+
+    console.warn('ajv error: ', id, validate.errors?.[0].instancePath, validate.errors?.[0].message)
+    return
+  }
+  console.warn('ajv submit!')
+}
+const submit = () => {
+  const list = edit.blockConfig.map((item) => {
+    return {
+      id: item.id,
+      value: item.formData,
+      schema: blockSchema[item.code as BlockSchemaKeys],
+    }
+  })
+  list.forEach((item) => {
+    validateAll(item)
+  })
+}
 </script>
 
 <style scoped lang="scss">
