@@ -51,19 +51,25 @@ watch(
   },
 )
 
-watch(column, (value) => {
-  if (value.length > maxItems) return
+watch(
+  column,
+  (value) => {
+    if (value.length > maxItems) return
 
-  const _value = value
-  const data = { desktop: _value, mobile: _value }
+    const _value = value
+    const data = { desktop: _value, mobile: _value }
 
-  emit('callback', {
-    data: {
-      [key]: data,
-    },
-    id,
-  })
-})
+    emit('callback', {
+      data: {
+        [key]: data,
+      },
+      id,
+    })
+  },
+  {
+    immediate: true,
+  },
+)
 
 const updateNumber = (length: number) => Array.from({ length: length }, (_) => 1 / length)
 const widthFormat = (width: number) => parseInt(String(width * 10000)) / 100 + '%'

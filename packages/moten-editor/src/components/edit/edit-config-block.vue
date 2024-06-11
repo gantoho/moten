@@ -19,7 +19,6 @@ import { blockSchema, type BlockSchemaKeys } from '@/config/schema'
 import type { BaseBlock } from '@/types/edit'
 import { findNodeById } from './nested'
 import deepmerge from 'deepmerge'
-import { cloneDeep } from 'lodash'
 
 const edit = useEditStore()
 

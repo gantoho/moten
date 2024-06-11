@@ -40,19 +40,25 @@ watch(
   },
 )
 
-watch(src, (value) => {
-  let data = {}
-  const _value = value || ''
-  if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
-  else data = { [props.viewport]: _value }
+watch(
+  src,
+  (value) => {
+    let data = {}
+    const _value = value || ''
+    if (Object.values(formData || {}).length < 2) data = { desktop: _value, mobile: _value }
+    else data = { [props.viewport]: _value }
 
-  emit('callback', {
-    data: {
-      [key]: data,
-    },
-    id,
-  })
-})
+    emit('callback', {
+      data: {
+        [key]: data,
+      },
+      id,
+    })
+  },
+  {
+    immediate: true,
+  },
+)
 
 const fileClick = () => {
   const list = [
