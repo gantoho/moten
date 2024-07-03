@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { query } from './common/mysql.js'
+import { response } from './utils/response.js'
 
 const app = express()
 const port = 3000
@@ -19,7 +20,7 @@ app.get('/1111', async (req, res) => {
   const sql = `SELECT * FROM page WHERE page_id = ? LIMIT 1`
   const params = [1]
   const result = await query(sql, params)
-  res.json(result)
+  res.json(response.success(result))
 })
 
 app.listen(port, () => {
