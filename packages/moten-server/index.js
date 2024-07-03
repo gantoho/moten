@@ -2,18 +2,16 @@ import express from 'express'
 import cors from 'cors'
 import { query } from './common/mysql.js'
 import { response } from './utils/response.js'
+import { error404Handler, errorHandler } from './middleware/error.js'
+import 'express-async-errors'
 
 const app = express()
 const port = 3000
 
 app.use(cors())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.get('/moten', (req, res) => {
-  res.send('Hello moten!')
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
 })
 
 app.get('/1111', async (req, res) => {
@@ -23,6 +21,6 @@ app.get('/1111', async (req, res) => {
   res.json(response.success(result))
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.use(errorHandler)
+
+app.use('*', error404Handler)
