@@ -1,25 +1,24 @@
 import express from 'express'
 import cors from 'cors'
-import { query } from './common/mysql.js'
-import { response } from './utils/response.js'
 import { error404Handler, errorHandler } from './middleware/error.js'
+import { pageController } from './controller/index.js'
 import 'express-async-errors'
 
 const app = express()
-const port = 3000
+const port = 8081
 
 app.use(cors())
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`app listening on port ${port}`)
 })
 
-app.get('/1111', async (req, res) => {
-  const sql = `SELECT * FROM page WHERE page_id = ? LIMIT 1`
-  const params = [1]
-  const result = await query(sql, params)
-  res.json(response.success(result))
-})
+// 页面
+app.get('/rest/v1/page', pageController.findAll())
+// app.get('/rest/v1/page/:pageId', pageController.findOne())
+// app.post('/rest/v1/page/create', pageController.create())
+// app.post('/rest/v1/page/delete', pageController.remove())
+// app.post('/rest/v1/page/update', pageController.update())
 
 app.use(errorHandler)
 
